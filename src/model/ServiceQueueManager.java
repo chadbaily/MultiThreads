@@ -24,7 +24,7 @@ public class ServiceQueueManager
 
 	public int totalServedSoFar()
 	{
-		retun 0;
+		return 0;
 	}
 
 	public int getMyTotalWaitTime()
