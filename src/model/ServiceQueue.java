@@ -60,5 +60,25 @@ public class ServiceQueue extends Queue
 	{
 		return myNumberCustomersServedSoFar;
 	}
+
+	public int getMyNumberCustomersInLine()
+	{
+		return myNumberCustomersInLine;
+	}
+
+	public int getMyTotalWaitTime()
+	{
+		return myTotalWaitTime;
+	}
+
+	public int getMyTotalServiceTime()
+	{
+		return myTotalServiceTime;
+	}
+
+	public int getMyTotalIdleTime()
+	{
+		return myTotalIdleTime;
+	}
 }
 
