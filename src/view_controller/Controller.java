@@ -11,14 +11,14 @@ public class Controller
 	///////////////////
 	// Properties //
 	///////////////////
-
+	public View myView;
 	/**
 	 * Controller constructor; view must be passed in since controller has responsibility to notify view when some event
 	 * takes place.
 	 */
 	public Controller()
 	{
-
+		myView = new View(this);
 	}
 
 }
