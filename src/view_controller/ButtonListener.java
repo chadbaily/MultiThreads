@@ -7,10 +7,11 @@ package view_controller;
  * @author Daniel Plante
  * @version 1.0 (28 January 2002)
  */
-import java.lang.reflect.*;
-import java.awt.event.MouseEvent;
+
 import java.awt.event.MouseAdapter;
-import java.lang.IllegalAccessException;
+import java.awt.event.MouseEvent;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class ButtonListener extends MouseAdapter
 {

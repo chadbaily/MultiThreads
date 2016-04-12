@@ -1,23 +1,17 @@
 package view_controller;
 
 /**
- * View for a Poker Game, has a frame, 3 JPanels (Background, each players cards(5)), 
- * multiple buttons, and JLabels to indicate what is happening in the game
+ * View for a Poker Game, has a frame, 3 JPanels (Background, each players cards(5)), multiple buttons, and JLabels to
+ * indicate what is happening in the game
+ *
  * @author chadbaily
  */
-import java.awt.*;
-import java.lang.reflect.*;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 
-@SuppressWarnings("serial")
-public class View extends Frame
+import javax.swing.*;
+import java.awt.*;
+import java.lang.reflect.Method;
+
+@SuppressWarnings("serial") public class View extends Frame
 {
 
 	/*
@@ -43,14 +37,16 @@ public class View extends Frame
 	private ImageIcon myBackgroundImage;
 	private JButton myDiscardButton;
 
-	///////////////////////
-	// Methods //
-	///////////////////////
+	private JTextArea myOverallStats;
+	private JScrollPane myOverallStatsScroll;
 
 	/**
-	 * View constructor used to lay out the view, sets up the initial view for
-	 * what the player sees
-	 *
+	 methods for the view
+	 */
+
+	/**
+	 * View constructor used to lay out the view, sets up the initial view for what the player sees
+	 * <p>
 	 * <pre>
 	 * pre:  none
 	 * post: the view is set up and initialized
@@ -58,114 +54,31 @@ public class View extends Frame
 	 */
 	public View(Controller controller)
 	{
-
-		String value;
-
-		int i;
-		myFrame = new JFrame("Swing Version");
+		myFrame = new JFrame("Service Queue Simulation");
 		myFrame.setSize(600, 600);
+		Box myLayout = new Box(BoxLayout.Y_AXIS);
 
-		GridBagConstraints c = new GridBagConstraints();
-		c.fill = GridBagConstraints.HORIZONTAL;
-
-		myCompCardView = new JLabel[myNumSquares];
-		myPlayerCardView = new JLabel[myNumSquares];
-
+		/*
+		Creating the button
+		 */
 		String myButtonText = "Start Game";
 		myStartButton = new JButton(myButtonText);
 
-		myDiscardButton = new JButton("Discard");
+		myOverallStats = new JTextArea("Chad");
+		myOverallStatsScroll = new JScrollPane(myOverallStats);
+		myLayout.add(myOverallStatsScroll);
 
-		myCardListener = new ButtonListener[myNumSquares];
+		myLayout.add(myStartButton);
+		myFrame.add(myLayout, BorderLayout.EAST);
 
-		myCompCardPanel = new JPanel(new GridLayout(1, 5, 8, 8));
-		myPlayerCardPanel = new JPanel(new GridLayout(1, 5, 8, 8));
-
-		myBackgroundImage = new ImageIcon("src/cards/background.jpg");
-		myBackgroundLabel = new JLabel(myBackgroundImage);
-		myBackgroundLabel.setLayout(new GridBagLayout());
-		myBackgroundLabel.setOpaque(false);
-		myFrame.add(myBackgroundLabel);
-
-		myBlankImage = new ImageIcon("src/cards/E.GIF");
-		myPlayerCardPanel.setOpaque(true);
-		myCompCardPanel.setOpaque(true);
-
-		/*
-		 * Sets the cards up with 2 rows of 5 cards, there backs facing up
-		 */
-		for (i = 0; i < myNumSquares; i++)
-		{
-			myCompCardView[i] = new JLabel(myBlankImage, JLabel.CENTER);
-			myPlayerCardView[i] = new JLabel(myBlankImage, JLabel.CENTER);
-
-			myCompCardView[i].setOpaque(false);
-			myPlayerCardView[i].setOpaque(false);
-
-			myPlayerCardPanel.add(myPlayerCardView[i]);
-			myCompCardPanel.add(myCompCardView[i]);
-		}
-
-		myPlayerCardPanel.setOpaque(false);
-		myCompCardPanel.setOpaque(false);
-
-		myController = controller;
-
-
-		myGameInfo = new JLabel();
-		myGameInfo.setForeground(Color.white);
-
-		myLabel.setForeground(Color.white);
-
-		myLabel.setSize(getSize());
-		myLabel.setFont(new Font("Serif", Font.BOLD, 16));
-
-		myPlayerInfo.setSize(getSize());
-		myPlayerInfo.setFont(new Font("Serif", Font.BOLD, 16));
-
-		myCPlayerInfo.setSize(getSize());
-		myCPlayerInfo.setFont(new Font("Serif", Font.BOLD, 16));
-
-		myGameInfo.setSize(getSize());
-		myGameInfo.setFont(new Font("Serif", Font.BOLD, 16));
-
-		c.gridx = 0;
-		c.gridy = 4;
-		myBackgroundLabel.add(myStartButton, c);
-
-		c.gridx = 0;
-		c.gridy = 5;
-		myBackgroundLabel.add(myGameInfo, c);
-
-		c.gridx = 0;
-		c.gridy = 1;
-		myBackgroundLabel.add(myCompCardPanel, c);
-
-		c.gridx = 0;
-		c.gridy = 3;
-		myBackgroundLabel.add(myPlayerCardPanel, c);
-
-		c.gridx = 1;
-		c.gridy = 2;
-		myBackgroundLabel.add(myLabel, c);
-
-		c.gridx = 0;
-		c.gridy = 0;
-		myBackgroundLabel.add(myPlayerInfo, c);
-
-		c.gridx = 1;
-		c.gridy = 0;
-		myBackgroundLabel.add(myCPlayerInfo, c);
-
-		this.associateListeners(controller);
+		//				this.associateListeners(controller);
 		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		myFrame.setVisible(true);
 	}
 
 	/**
-	 * Associates each component's listener with the controller and the correct
-	 * method to invoke when triggered.
-	 *
+	 * Associates each component's listener with the controller and the correct method to invoke when triggered.
+	 * <p>
 	 * <pre>
 	 * pre:  the controller class has be instantiated
 	 * post: all listeners have been associated to the controller
