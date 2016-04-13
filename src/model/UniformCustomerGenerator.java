@@ -17,5 +17,6 @@ public class UniformCustomerGenerator
 	public int generateTimeBetweenCustomers()
 	{
 		return 0;
+		//chad
 	}
 }
