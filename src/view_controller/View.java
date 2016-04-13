@@ -65,10 +65,13 @@ import java.lang.reflect.Method;
 		String myButtonText = "Start Game";
 		myStartButton = new JButton(myButtonText);
 
-		myOverallStats = new JTextArea(myButtonText);
-		myOverallStats.setSize(5, 5);
+		myOverallStats = new JTextArea(
+				"phdakjdgsgfhkfghasgfhjsgfhasgfahsgfhfahsgfdsfhgdsfgsdjhfgajhfgashfgashdgfhsdgfhajsdfgjahsdgfajkhsfgajkhsgfajshfgahjsfgajhsdgfajhsfgajhksdfgasjfgasdhjfgahjsdfgajhsfgahjsdfgadshjfg");
+
+		myOverallStats.setMaximumSize(myOverallStats.getPreferredSize());
 		myCashierStats = new JTextArea(myButtonText);
 
+		myCashierStats.setMaximumSize(myOverallStats.getPreferredSize());
 		//		myOverallStatsScroll = new JScrollPane(myOverallStats);
 		//
 		//		myLayout.add(myOverallStatsScroll);
