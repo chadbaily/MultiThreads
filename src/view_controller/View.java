@@ -38,6 +38,7 @@ import java.lang.reflect.Method;
 	private JButton myDiscardButton;
 
 	private JTextArea myOverallStats;
+	private JTextArea myCashierStats;
 	private JScrollPane myOverallStatsScroll;
 
 	/**
@@ -64,9 +65,15 @@ import java.lang.reflect.Method;
 		String myButtonText = "Start Game";
 		myStartButton = new JButton(myButtonText);
 
-		myOverallStats = new JTextArea("Chad");
-		myOverallStatsScroll = new JScrollPane(myOverallStats);
-		myLayout.add(myOverallStatsScroll);
+		myOverallStats = new JTextArea(myButtonText);
+		myOverallStats.setSize(5, 5);
+		myCashierStats = new JTextArea(myButtonText);
+
+		//		myOverallStatsScroll = new JScrollPane(myOverallStats);
+		//
+		//		myLayout.add(myOverallStatsScroll);
+		myLayout.add(myCashierStats);
+		myLayout.add(myOverallStats);
 
 		myLayout.add(myStartButton);
 		myFrame.add(myLayout, BorderLayout.EAST);
