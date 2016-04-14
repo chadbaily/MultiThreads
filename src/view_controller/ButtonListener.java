@@ -1,8 +1,7 @@
 package view_controller;
 /**
- * A basic buttonlistener that has as its primary responsibility
- * that of invoking the appropriate method of some other class
- * when the mouse pointer is over the button and is released.
+ * A basic buttonlistener that has as its primary responsibility that of invoking the appropriate method of some other
+ * class when the mouse pointer is over the button and is released.
  *
  * @author Daniel Plante
  * @version 1.0 (28 January 2002)
