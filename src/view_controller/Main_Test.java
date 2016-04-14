@@ -1,3 +1,5 @@
+package view_controller;
+
 import model.ServiceQueueManager;
 
 import java.util.Random;
