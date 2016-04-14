@@ -19,7 +19,20 @@ public class ServiceQueueManager
 
 	public ServiceQueueManager()
 	{
-
+		for (int i = 0; i < MAX_NUMBER_OF_QUEUES; i++)
+		{
+			System.out.println(i);
+			myServiceQueues = new ServiceQueue[i];
+		}
+		myTotalWaitTime = 0;
+		myAverageIdleTime = 0;
+		myAverageServiceTime = 0;
+		myAverageWaitTime = 0;
+		myNumberOfServiceQueues = 0;
+		myPresentTime = 0;
+		myStartTime = 0;
+		myTotalServiceTime = 0;
+		myTotalIdleTime = 0;
 	}
 
 	public int totalServedSoFar()

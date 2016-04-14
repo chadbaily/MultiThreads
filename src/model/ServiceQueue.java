@@ -10,6 +10,18 @@ public class ServiceQueue extends Queue
 	private int myTotalWaitTime;
 	private int myTotalServiceTime;
 	private int myTotalIdleTime;
+	private int myTotalTime;
+
+	public ServiceQueue(int myNumberCustomersServedSoFar, int myNumberCustomersInLine, int myTotalWaitTime,
+			int myTotalServiceTime, int myTotalIdleTime, int myTotalTime)
+	{
+		this.myNumberCustomersServedSoFar = myNumberCustomersServedSoFar;
+		this.myNumberCustomersInLine = myNumberCustomersInLine;
+		this.myTotalWaitTime = myTotalWaitTime;
+		this.myTotalServiceTime = myTotalServiceTime;
+		this.myTotalIdleTime = myTotalIdleTime;
+		this.myTotalTime = myTotalTime;
+	}
 
 	public ServiceQueue()
 	{
@@ -18,10 +30,10 @@ public class ServiceQueue extends Queue
 
 	public void addToElapsedTime(int elapsed)
 	{
-
+		myTotalTime = myTotalTime + elapsed;
 	}
 
-	public void addToToggleTime(int idle)
+	public void addToTotalTime(int idle)
 	{
 
 	}
@@ -79,6 +91,11 @@ public class ServiceQueue extends Queue
 	public int getMyTotalIdleTime()
 	{
 		return myTotalIdleTime;
+	}
+
+	public int getMyTotalTime()
+	{
+		return myTotalTime;
 	}
 }
 
