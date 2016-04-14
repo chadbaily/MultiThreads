@@ -5,24 +5,24 @@ public class MVCBasics
 	// Properties
 	private Controller myController;
 
+	public MVCBasics()
+	{
+		setController(new Controller());
+	}
+
 	// Methods
 	public static void main(String[] args)
 	{
 		new MVCBasics();
 	}
 
-	public MVCBasics()
+	public Controller getController()
 	{
-		setController(new Controller());
+		return myController;
 	}
 
 	public void setController(Controller controller)
 	{
 		myController = controller;
-	}
-
-	public Controller getController()
-	{
-		return myController;
 	}
 }

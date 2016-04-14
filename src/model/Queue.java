@@ -3,6 +3,7 @@ package model;
 /**
  * Created by chadbaily on 4/12/16.
  */
+
 import java.util.LinkedList;
 
 public class Queue<T>
