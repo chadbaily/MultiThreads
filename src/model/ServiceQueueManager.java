@@ -62,17 +62,17 @@ public class ServiceQueueManager
 
 	public float getMyAverageWaitTime()
 	{
-		return 0;
+		return myAverageWaitTime;
 	}
 
 	public float getMyAverageServiceTime()
 	{
-		return 0;
+		return myAverageServiceTime;
 	}
 
 	public int getMyAverageIdleTime()
 	{
-		return 0;
+		return myAverageIdleTime;
 	}
 
 }

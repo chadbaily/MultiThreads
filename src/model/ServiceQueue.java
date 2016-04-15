@@ -28,11 +28,6 @@ public class ServiceQueue extends Queue
 
 	}
 
-	public void addToElapsedTime(int elapsed)
-	{
-		myTotalTime = myTotalTime + elapsed;
-	}
-
 	public void addToTotalTime(int idle)
 	{
 
