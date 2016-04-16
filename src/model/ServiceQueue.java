@@ -64,7 +64,7 @@ public class ServiceQueue extends Queue
 
 	public int getNumberCustomersInLine()
 	{
-		return myNumberCustomersInLine;
+		return this.size();
 	}
 
 	public int getTotalWaitTime()

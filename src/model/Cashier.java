@@ -14,11 +14,11 @@ public class Cashier implements Runnable
 	private int myCounter;
 	private ServiceQueue myServiceQueue;
 
-	public Cashier(int myMaxTimeOfService, ServiceQueue serviceQueue)
+	public Cashier(int MaxTimeOfService, ServiceQueue serviceQueue)
 	{
-		this.myMaxTimeOfService = myMaxTimeOfService;
-		myThread = new Thread(this.myThread);
-		myServiceQueue = new ServiceQueue();
+		this.myMaxTimeOfService = MaxTimeOfService;
+		myThread = new Thread(this);
+		myServiceQueue = serviceQueue;
 		mySuspended = false;
 		//Plantes code
 		myCounter = 0;
@@ -39,20 +39,24 @@ public class Cashier implements Runnable
 	{
 		if (myServiceQueue.getNumberCustomersInLine() > 0)
 		{
+			this.waitWhileSuspended();
+			myServiceQueue.setNumberCustomersInLine(myServiceQueue.getNumberCustomersInLine() - 1);
+			myServiceQueue.setNumberCustomersServedSoFar(myServiceQueue.getNumberCustomersServedSoFar() + 1);
+			System.out.println(myServiceQueue.getNumberCustomersServedSoFar());
+
 			try
 			{
 				Thread.sleep(generateServiceTime());
-				myServiceQueue.setNumberCustomersInLine(myServiceQueue.getNumberCustomersInLine() - 1);
-				myServiceQueue.setMyTotalServiceTime(myServiceQueue.getNumberCustomersServedSoFar() + 1);
-				return myServiceQueue.getNumberCustomersServedSoFar();
 			}
+
 			catch (InterruptedException e)
 			{
 				e.printStackTrace();
 			}
+			return myServiceQueue.getNumberCustomersServedSoFar();
 		}
-
-		return 0;
+		else
+			return 0;
 	}
 
 	public int generateServiceTime()
@@ -74,31 +78,6 @@ public class Cashier implements Runnable
 		{
 			System.out.println("Thread " + myThread.getName() + " suspended.");
 		}
-	}
-
-	/**
-	 * Delete me at some point
-	 */
-	private void doSomething() throws InterruptedException
-	{
-		while (myCounter < 100)
-		{
-			this.waitWhileSuspended();
-
-			System.out.println(myCounter);
-			myCounter++;
-
-			try
-			{
-				Thread.sleep(10);
-			}
-			catch (InterruptedException e)
-			{
-				String message = e.getMessage();
-				System.err.println(message);
-			}
-		}
-
 	}
 
 	/**
