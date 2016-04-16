@@ -7,7 +7,7 @@ public class CustomerGenerator implements Runnable
 {
 	private int myMaxTimeBetweenCustomers;
 
-	public CustomerGenerator(int maxTimeBetweenCustomers, ServiceQueueManager serviceQueueManager)
+	public CustomerGenerator(int maxTimeBetweenCustomers, ServiceQueueManager serviceQueueManager, int maxNumberOfCustomers)
 	{
 
 	}

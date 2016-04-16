@@ -12,20 +12,14 @@ public class ServiceQueue extends Queue
 	private int myTotalIdleTime;
 	private int myTotalTime;
 
-	public ServiceQueue(int myNumberCustomersServedSoFar, int myNumberCustomersInLine, int myTotalWaitTime,
-			int myTotalServiceTime, int myTotalIdleTime, int myTotalTime)
-	{
-		this.myNumberCustomersServedSoFar = myNumberCustomersServedSoFar;
-		this.myNumberCustomersInLine = myNumberCustomersInLine;
-		this.myTotalWaitTime = myTotalWaitTime;
-		this.myTotalServiceTime = myTotalServiceTime;
-		this.myTotalIdleTime = myTotalIdleTime;
-		this.myTotalTime = myTotalTime;
-	}
-
 	public ServiceQueue()
 	{
-
+		myNumberCustomersInLine = 0;
+		myNumberCustomersServedSoFar = 0;
+		myTotalIdleTime = 0;
+		myTotalServiceTime = 0;
+		myTotalWaitTime = 0;
+		myTotalTime = 0;
 	}
 
 	public void addToTotalTime(int idle)
@@ -63,34 +57,64 @@ public class ServiceQueue extends Queue
 		return 0;
 	}
 
-	public int getMyNumberCustomersServedSoFar()
+	public int getNumberCustomersServedSoFar()
 	{
 		return myNumberCustomersServedSoFar;
 	}
 
-	public int getMyNumberCustomersInLine()
+	public int getNumberCustomersInLine()
 	{
 		return myNumberCustomersInLine;
 	}
 
-	public int getMyTotalWaitTime()
+	public int getTotalWaitTime()
 	{
 		return myTotalWaitTime;
 	}
 
-	public int getMyTotalServiceTime()
+	public int getTotalServiceTime()
 	{
 		return myTotalServiceTime;
 	}
 
-	public int getMyTotalIdleTime()
+	public int getTotalIdleTime()
 	{
 		return myTotalIdleTime;
 	}
 
-	public int getMyTotalTime()
+	public int getTotalTime()
 	{
 		return myTotalTime;
+	}
+
+	public void setNumberCustomersServedSoFar(int myNumberCustomersServedSoFar)
+	{
+		this.myNumberCustomersServedSoFar = myNumberCustomersServedSoFar;
+	}
+
+	public void setNumberCustomersInLine(int myNumberCustomersInLine)
+	{
+		this.myNumberCustomersInLine = myNumberCustomersInLine;
+	}
+
+	public void setTotalWaitTime(int myTotalWaitTime)
+	{
+		this.myTotalWaitTime = myTotalWaitTime;
+	}
+
+	public void setMyTotalServiceTime(int myTotalServiceTime)
+	{
+		this.myTotalServiceTime = myTotalServiceTime;
+	}
+
+	public void setTotalIdleTime(int myTotalIdleTime)
+	{
+		this.myTotalIdleTime = myTotalIdleTime;
+	}
+
+	public void setTotalTime(int myTotalTime)
+	{
+		this.myTotalTime = myTotalTime;
 	}
 }
 
