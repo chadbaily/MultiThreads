@@ -21,15 +21,13 @@ public class Main_Test
 		Customer myCustomer4 = new Customer();
 		Customer myCustomer5 = new Customer();
 
-		myServiceQueue.enqueue(myCustomer1);
-		myServiceQueue.enqueue(myCustomer2);
-		myServiceQueue.enqueue(myCustomer3);
-		myServiceQueue.enqueue(myCustomer4);
-		myServiceQueue.enqueue(myCustomer5);
+		myServiceQueue.insertCustomer(myCustomer1);
+		myServiceQueue.insertCustomer(myCustomer2);
+		myServiceQueue.insertCustomer(myCustomer3);
+		myServiceQueue.insertCustomer(myCustomer4);
+		myServiceQueue.insertCustomer(myCustomer5);
 
 		myCashier.start();
-		myCashier.suspend();
-		System.out.println("Did it!");
 
 		//		myServiceQueue.dequeue();
 		//		System.out.println(myServiceQueue.getNumberCustomersInLine());

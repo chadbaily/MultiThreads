@@ -39,6 +39,7 @@ public class Cashier implements Runnable
 			{
 				myServiceTime = generateServiceTime();
 				Thread.sleep(myServiceTime);
+				//Delete me later
 				System.out.println("Waiting Time for serving: " + myServiceTime);
 			}
 
@@ -49,8 +50,9 @@ public class Cashier implements Runnable
 			((Customer) myServiceQueue.peek()).setServiceTime(myServiceTime);
 			myServiceQueue.addToSericeTime(myServiceTime);
 			myServiceQueue.serveCustomer();
+			//Delete me later
 			System.out.println("Customers Served So Far: " + myServiceQueue.getNumberCustomersServedSoFar());
-			System.out.println("Customers in Line: " + myServiceQueue.getNumberCustomersInLine());
+			System.out.println("Customers in Line: " + myServiceQueue.getNumberCustomersInLine() + "\n");
 
 		}
 		return myServiceQueue.getNumberCustomersInLine() == 0;
