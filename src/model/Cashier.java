@@ -84,6 +84,7 @@ public class Cashier implements Runnable
 		}
 		catch (NullPointerException e)
 		{
+			System.exit(0);
 			System.out.println("No More Customers: " + e);
 		}
 		catch (InterruptedException e)

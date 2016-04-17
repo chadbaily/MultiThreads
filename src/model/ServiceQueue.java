@@ -10,7 +10,8 @@ public class ServiceQueue extends Queue
 	private long myTotalWaitTime;
 	private long myTotalServiceTime;
 	private long myTotalIdleTime;
-	private int myTotalTime;
+	private long myTotalTime;
+	private long myStartTime;
 
 	public ServiceQueue()
 	{
@@ -19,7 +20,7 @@ public class ServiceQueue extends Queue
 		myTotalIdleTime = 0;
 		myTotalServiceTime = 0;
 		myTotalWaitTime = 0;
-		myTotalTime = 0;
+		myStartTime = System.currentTimeMillis();
 	}
 
 	public void addToTotalTime(int idle)
@@ -49,8 +50,8 @@ public class ServiceQueue extends Queue
 	}
 
 	/**
-	 * Method that sets the wait time for the customer by using their enrty time - the current time. They are then dequeued
-	 * and the proper methods are updated to show that a customer has been served
+	 * Method that sets the wait time for the customer by using their enrty time - the current time. They are then
+	 * dequeued and the proper methods are updated to show that a customer has been served
 	 *
 	 * @return the customer that was served
 	 */
@@ -68,12 +69,14 @@ public class ServiceQueue extends Queue
 		//Delete me later
 		System.out.println("Average Wait Time: " + this.averageWaitTime());
 		System.out.println("Average Service Time: " + this.averageServiceTime());
+		System.out.println("Total Time: " + this.getTotalTime());
 
 		return c;
 	}
 
 	/**
-	 * Takes the total wait time and divides it by the amount of customers that have been served so far to get the average
+	 * Takes the total wait time and divides it by the amount of customers that have been served so far to get the
+	 * average
 	 *
 	 * @return The average time waited by all customers who have been served so far
 	 */
@@ -83,7 +86,8 @@ public class ServiceQueue extends Queue
 	}
 
 	/**
-	 * Takes the total service time and divides it by the amount of customers that have been served so far to get the average
+	 * Takes the total service time and divides it by the amount of customers that have been served so far to get the
+	 * average
 	 *
 	 * @return The average service time of all customers who have been served so far
 	 */
@@ -93,7 +97,8 @@ public class ServiceQueue extends Queue
 	}
 
 	/**
-	 * Takes the toal idle time and divides it by the amount of customers that have been served so far to get the average
+	 * Takes the toal idle time and divides it by the amount of customers that have been served so far to get the
+	 * average
 	 *
 	 * @return The average idle time of all customers who have been served so far
 	 */
@@ -127,8 +132,9 @@ public class ServiceQueue extends Queue
 		return myTotalIdleTime;
 	}
 
-	public int getTotalTime()
+	public long getTotalTime()
 	{
+		myTotalTime = System.currentTimeMillis() - myStartTime;
 		return myTotalTime;
 	}
 }
