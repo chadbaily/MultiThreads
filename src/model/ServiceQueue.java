@@ -8,8 +8,8 @@ public class ServiceQueue extends Queue
 	private int myNumberCustomersServedSoFar;
 	private int myNumberCustomersInLine;
 	private int myTotalWaitTime;
-	private int myTotalServiceTime;
-	private int myTotalIdleTime;
+	private long myTotalServiceTime;
+	private long myTotalIdleTime;
 	private int myTotalTime;
 
 	public ServiceQueue()
@@ -32,7 +32,7 @@ public class ServiceQueue extends Queue
 		myTotalWaitTime = myTotalWaitTime + wait;
 	}
 
-	public void addToSericeTime(int service)
+	public void addToSericeTime(long service)
 	{
 		myTotalServiceTime = myTotalServiceTime + service;
 	}
@@ -60,7 +60,7 @@ public class ServiceQueue extends Queue
 	 *
 	 * @return The average service time of all customers who have been served so far
 	 */
-	public int averageServiceTime()
+	public long averageServiceTime()
 	{
 		return myTotalServiceTime / this.getNumberCustomersServedSoFar();
 	}
@@ -70,7 +70,7 @@ public class ServiceQueue extends Queue
 	 *
 	 * @return The average idle time of all customers who have been served so far
 	 */
-	public int averageIdleTime()
+	public long averageIdleTime()
 	{
 		return myTotalIdleTime / this.getNumberCustomersServedSoFar();
 	}
@@ -90,12 +90,12 @@ public class ServiceQueue extends Queue
 		return myTotalWaitTime;
 	}
 
-	public int getTotalServiceTime()
+	public long getTotalServiceTime()
 	{
 		return myTotalServiceTime;
 	}
 
-	public int getTotalIdleTime()
+	public long getTotalIdleTime()
 	{
 		return myTotalIdleTime;
 	}
