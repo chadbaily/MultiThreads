@@ -10,8 +10,6 @@ public class Cashier implements Runnable
 	private int myMaxTimeOfService;
 	private Thread myThread;
 	private boolean mySuspended;
-	//For Plantes code
-	private int myCounter;
 	private ServiceQueue myServiceQueue;
 
 	public Cashier(int MaxTimeOfService, ServiceQueue serviceQueue)
@@ -20,8 +18,6 @@ public class Cashier implements Runnable
 		myThread = new Thread(this);
 		myServiceQueue = serviceQueue;
 		mySuspended = false;
-		//Plantes code
-		myCounter = 0;
 	}
 
 	public void suspend()
@@ -35,7 +31,15 @@ public class Cashier implements Runnable
 		this.notify();
 	}
 
-	public int serveCustomer() throws InterruptedException
+	/**
+	 * Method that services all customers in the serviceQueue that was passed in. Gets a service time and wait that long
+	 * to service the customer. Then the customer is removed from the queue and the service queue is updated to show
+	 * this
+	 *
+	 * @return
+	 * @throws InterruptedException
+	 */
+	public boolean serveCustomer() throws InterruptedException
 	{
 		while (myServiceQueue.getNumberCustomersInLine() > 0)
 		{
@@ -56,23 +60,29 @@ public class Cashier implements Runnable
 			System.out.println("Customers Served So Far: " + myServiceQueue.getNumberCustomersServedSoFar());
 			System.out.println("Customers in Line: " + myServiceQueue.getNumberCustomersInLine());
 
-
-
 		}
 		if (myServiceQueue.getNumberCustomersInLine() == 0)
 		{
-			return 0;
+			return true;
 		}
 		else
-			return 0;
+			return false;
 	}
 
+	/**
+	 * Method that uses a random generator to create a random number for the cashier to wait before serving a customer
+	 *
+	 * @return the time the cashier needs to wait before serving a customer
+	 */
 	public int generateServiceTime()
 	{
 		Random random = new Random();
 		return random.nextInt(myMaxTimeOfService) + 1;
 	}
 
+	/**
+	 * Is called when start is, calls the serveCustomer()
+	 */
 	public void run()
 	{
 		try
