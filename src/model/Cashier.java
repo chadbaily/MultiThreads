@@ -20,17 +20,6 @@ public class Cashier implements Runnable
 		mySuspended = false;
 	}
 
-	public void suspend()
-	{
-		mySuspended = true;
-	}
-
-	public synchronized void resume()
-	{
-		mySuspended = false;
-		this.notify();
-	}
-
 	/**
 	 * Method that services all customers in the serviceQueue that was passed in. Gets a service time and wait that long
 	 * to service the customer. Then the customer is removed from the queue and the service queue is updated to show
@@ -44,6 +33,7 @@ public class Cashier implements Runnable
 		while (myServiceQueue.getNumberCustomersInLine() > 0)
 		{
 			this.waitWhileSuspended();
+
 			try
 			{
 				long o = generateServiceTime();
@@ -61,12 +51,7 @@ public class Cashier implements Runnable
 			System.out.println("Customers in Line: " + myServiceQueue.getNumberCustomersInLine());
 
 		}
-		if (myServiceQueue.getNumberCustomersInLine() == 0)
-		{
-			return true;
-		}
-		else
-			return false;
+		return myServiceQueue.getNumberCustomersInLine() == 0;
 	}
 
 	/**
@@ -124,6 +109,17 @@ public class Cashier implements Runnable
 		{
 			System.out.println("Thread already started");
 		}
+	}
+
+	public void suspend()
+	{
+		mySuspended = true;
+	}
+
+	public synchronized void resume()
+	{
+		mySuspended = false;
+		this.notify();
 	}
 
 	/**

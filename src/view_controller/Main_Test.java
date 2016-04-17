@@ -28,6 +28,8 @@ public class Main_Test
 		myServiceQueue.enqueue(myCustomer5);
 
 		myCashier.start();
+		myCashier.suspend();
+		System.out.println("Did it!");
 
 		//		myServiceQueue.dequeue();
 		//		System.out.println(myServiceQueue.getNumberCustomersInLine());
