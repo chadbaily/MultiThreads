@@ -5,9 +5,9 @@ package model;
  */
 public class Customer
 {
-	private int myServiceTime;
-	private int myEntryTime;
-	private int myWaitTime;
+	private long myServiceTime;
+	private long myEntryTime;
+	private long myWaitTime;
 	private long myStart;
 
 	public Customer()
@@ -15,42 +15,43 @@ public class Customer
 		myServiceTime = 0;
 		myEntryTime = 0;
 		myWaitTime = 0;
+		System.gc();
 		myStart = System.currentTimeMillis();
 	}
 
-	public int getWaitTime()
+	public long getWaitTime()
 	{
 		return myWaitTime;
 	}
 
-	public int getEntryTime()
+	public long getEntryTime()
 	{
 		return myEntryTime;
 	}
 
-	public int getServiceTime()
+	public long getServiceTime()
 	{
 
 		return myServiceTime;
 	}
 
-	public void setServiceTime(int myServiceTime)
+	public void setServiceTime(long serviceTime)
 	{
-		this.myServiceTime = myServiceTime;
+		myServiceTime = serviceTime;
 	}
 
-	public void setEntryTime(int myEntryTime)
+	public void setEntryTime(long entryTime)
 	{
-		this.myEntryTime = myEntryTime;
+		myEntryTime = entryTime;
 	}
 
-	public void setWaitTime(int myWaitTime)
+	public void setWaitTime(long waitTime)
 	{
-		this.myWaitTime = myWaitTime;
+		myWaitTime = waitTime;
 	}
 
-	public void setStart(long myStart)
+	public void setStart(long start)
 	{
-		this.myStart = myStart;
+		myStart = start;
 	}
 }

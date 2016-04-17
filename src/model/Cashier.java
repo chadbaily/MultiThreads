@@ -11,6 +11,7 @@ public class Cashier implements Runnable
 	private Thread myThread;
 	private boolean mySuspended;
 	private ServiceQueue myServiceQueue;
+	private long myServiceTime;
 
 	public Cashier(int MaxTimeOfService, ServiceQueue serviceQueue)
 	{
@@ -36,16 +37,17 @@ public class Cashier implements Runnable
 
 			try
 			{
-				long o = generateServiceTime();
-				Thread.sleep(o);
-				System.out.println("Waiting Time for serving: " + o);
+				myServiceTime = generateServiceTime();
+				Thread.sleep(myServiceTime);
+				System.out.println("Waiting Time for serving: " + myServiceTime);
 			}
 
 			catch (InterruptedException e)
 			{
 				e.printStackTrace();
 			}
-
+			((Customer) myServiceQueue.peek()).setServiceTime(myServiceTime);
+			myServiceQueue.addToSericeTime(myServiceTime);
 			myServiceQueue.serveCustomer();
 			System.out.println("Customers Served So Far: " + myServiceQueue.getNumberCustomersServedSoFar());
 			System.out.println("Customers in Line: " + myServiceQueue.getNumberCustomersInLine());
