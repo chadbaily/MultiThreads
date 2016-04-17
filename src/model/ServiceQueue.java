@@ -7,14 +7,14 @@ public class ServiceQueue extends Queue
 {
 	private int myNumberCustomersServedSoFar;
 	private int myNumberCustomersInLine;
-	private int myTotalWaitTime;
+	private long myTotalWaitTime;
 	private long myTotalServiceTime;
 	private long myTotalIdleTime;
 	private int myTotalTime;
 
 	public ServiceQueue()
 	{
-		myNumberCustomersInLine = 0;
+		myNumberCustomersInLine = this.size();
 		myNumberCustomersServedSoFar = 0;
 		myTotalIdleTime = 0;
 		myTotalServiceTime = 0;
@@ -37,11 +37,38 @@ public class ServiceQueue extends Queue
 		myTotalServiceTime = myTotalServiceTime + service;
 	}
 
+	/**
+	 * Method that takes in a customer, sets their enrty time, then adds them to the queue
+	 *
+	 * @param customer
+	 */
+	public void insertCustomer(Customer customer)
+	{
+		customer.setEntryTime(System.currentTimeMillis());
+		this.enqueue(customer);
+	}
+
+	/**
+	 * Method that sets the wait time for the customer by using their enrty time - the current time. They are then dequeued
+	 * and the proper methods are updated to show that a customer has been served
+	 *
+	 * @return the customer that was served
+	 */
 	public Customer serveCustomer()
 	{
 		Customer c = (Customer) this.peek();
+		((Customer) this.peek()).setWaitTime(System.currentTimeMillis() - c.getEntryTime());
+		myTotalWaitTime = myTotalWaitTime + ((Customer) this.peek()).getWaitTime();
+		myTotalServiceTime = myTotalServiceTime + ((Customer) this.peek()).getServiceTime();
+		//Delete me later
+		System.out.println("Wait Time: " + ((Customer) this.peek()).getWaitTime());
 		this.dequeue();
 		myNumberCustomersServedSoFar = myNumberCustomersServedSoFar + 1;
+		myNumberCustomersInLine = this.size();
+		//Delete me later
+		System.out.println("Average Wait Time: " + this.averageWaitTime());
+		System.out.println("Average Service Time: " + this.averageServiceTime());
+
 		return c;
 	}
 
@@ -50,7 +77,7 @@ public class ServiceQueue extends Queue
 	 *
 	 * @return The average time waited by all customers who have been served so far
 	 */
-	public int averageWaitTime()
+	public long averageWaitTime()
 	{
 		return myTotalWaitTime / this.getNumberCustomersServedSoFar();
 	}
@@ -85,7 +112,7 @@ public class ServiceQueue extends Queue
 		return this.size();
 	}
 
-	public int getTotalWaitTime()
+	public long getTotalWaitTime()
 	{
 		return myTotalWaitTime;
 	}

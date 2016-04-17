@@ -39,7 +39,8 @@ public class Cashier implements Runnable
 			{
 				myServiceTime = generateServiceTime();
 				Thread.sleep(myServiceTime);
-				System.out.println("Waiting Time for serving: " + myServiceTime);
+				//Delete me later
+				System.out.println("Service Time: " + myServiceTime);
 			}
 
 			catch (InterruptedException e)
@@ -49,10 +50,12 @@ public class Cashier implements Runnable
 			((Customer) myServiceQueue.peek()).setServiceTime(myServiceTime);
 			myServiceQueue.addToSericeTime(myServiceTime);
 			myServiceQueue.serveCustomer();
+			//Delete me later
 			System.out.println("Customers Served So Far: " + myServiceQueue.getNumberCustomersServedSoFar());
-			System.out.println("Customers in Line: " + myServiceQueue.getNumberCustomersInLine());
+			System.out.println("Customers in Line: " + myServiceQueue.getNumberCustomersInLine() + "\n");
 
 		}
+		System.exit(0);
 		return myServiceQueue.getNumberCustomersInLine() == 0;
 	}
 
@@ -79,9 +82,13 @@ public class Cashier implements Runnable
 				this.serveCustomer();
 			}
 		}
+		catch (NullPointerException e)
+		{
+			System.out.println("No More Customers: " + e);
+		}
 		catch (InterruptedException e)
 		{
-			System.out.println("Thread " + myThread.getName() + " suspended.");
+			e.printStackTrace();
 		}
 	}
 
