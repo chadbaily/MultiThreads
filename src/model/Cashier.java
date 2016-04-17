@@ -40,7 +40,7 @@ public class Cashier implements Runnable
 				myServiceTime = generateServiceTime();
 				Thread.sleep(myServiceTime);
 				//Delete me later
-				System.out.println("Waiting Time for serving: " + myServiceTime);
+				System.out.println("Service Time: " + myServiceTime);
 			}
 
 			catch (InterruptedException e)
@@ -55,6 +55,7 @@ public class Cashier implements Runnable
 			System.out.println("Customers in Line: " + myServiceQueue.getNumberCustomersInLine() + "\n");
 
 		}
+		System.exit(0);
 		return myServiceQueue.getNumberCustomersInLine() == 0;
 	}
 
@@ -81,9 +82,13 @@ public class Cashier implements Runnable
 				this.serveCustomer();
 			}
 		}
+		catch (NullPointerException e)
+		{
+			System.out.println("No More Customers: " + e);
+		}
 		catch (InterruptedException e)
 		{
-			System.out.println("Thread " + myThread.getName() + " suspended.");
+			e.printStackTrace();
 		}
 	}
 

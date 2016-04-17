@@ -59,6 +59,7 @@ public class ServiceQueue extends Queue
 		Customer c = (Customer) this.peek();
 		((Customer) this.peek()).setWaitTime(System.currentTimeMillis() - c.getEntryTime());
 		myTotalWaitTime = myTotalWaitTime + ((Customer) this.peek()).getWaitTime();
+		myTotalServiceTime = myTotalServiceTime + ((Customer) this.peek()).getServiceTime();
 		//Delete me later
 		System.out.println("Wait Time: " + ((Customer) this.peek()).getWaitTime());
 		this.dequeue();
@@ -66,6 +67,8 @@ public class ServiceQueue extends Queue
 		myNumberCustomersInLine = this.size();
 		//Delete me later
 		System.out.println("Average Wait Time: " + this.averageWaitTime());
+		System.out.println("Average Service Time: " + this.averageServiceTime());
+
 		return c;
 	}
 
