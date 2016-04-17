@@ -29,9 +29,7 @@ public class Main_Test
 
 		myCashier.start();
 
-
-	System.out.println("Manual: " + myServiceQueue.getNumberCustomersInLine());
-//		myServiceQueue.dequeue();
-//		System.out.println(myServiceQueue.getNumberCustomersInLine());
+		//		myServiceQueue.dequeue();
+		//		System.out.println(myServiceQueue.getNumberCustomersInLine());
 	}
 }

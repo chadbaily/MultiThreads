@@ -37,9 +37,12 @@ public class ServiceQueue extends Queue
 
 	}
 
-	public Customer serveCustomer(Customer customer)
+	public Customer serveCustomer()
 	{
-		return null;
+		Customer c = (Customer) this.peek();
+		this.dequeue();
+		myNumberCustomersServedSoFar = myNumberCustomersServedSoFar + 1;
+		return c;
 	}
 
 	public int averageWaitTime()
@@ -87,34 +90,34 @@ public class ServiceQueue extends Queue
 		return myTotalTime;
 	}
 
-	public void setNumberCustomersServedSoFar(int myNumberCustomersServedSoFar)
+	public void setNumberCustomersServedSoFar(int NumberCustomersServedSoFar)
 	{
-		this.myNumberCustomersServedSoFar = myNumberCustomersServedSoFar;
+		this.myNumberCustomersServedSoFar = NumberCustomersServedSoFar;
 	}
 
-	public void setNumberCustomersInLine(int myNumberCustomersInLine)
+	public void setNumberCustomersInLine(int NumberCustomersInLine)
 	{
-		this.myNumberCustomersInLine = myNumberCustomersInLine;
+		this.myNumberCustomersInLine = NumberCustomersInLine;
 	}
 
-	public void setTotalWaitTime(int myTotalWaitTime)
+	public void setTotalWaitTime(int TotalWaitTime)
 	{
-		this.myTotalWaitTime = myTotalWaitTime;
+		this.myTotalWaitTime = TotalWaitTime;
 	}
 
-	public void setMyTotalServiceTime(int myTotalServiceTime)
+	public void setMyTotalServiceTime(int TotalServiceTime)
 	{
-		this.myTotalServiceTime = myTotalServiceTime;
+		this.myTotalServiceTime = TotalServiceTime;
 	}
 
-	public void setTotalIdleTime(int myTotalIdleTime)
+	public void setTotalIdleTime(int TotalIdleTime)
 	{
-		this.myTotalIdleTime = myTotalIdleTime;
+		this.myTotalIdleTime = TotalIdleTime;
 	}
 
-	public void setTotalTime(int myTotalTime)
+	public void setTotalTime(int TotalTime)
 	{
-		this.myTotalTime = myTotalTime;
+		this.myTotalTime = TotalTime;
 	}
 }
 

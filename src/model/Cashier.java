@@ -37,23 +37,31 @@ public class Cashier implements Runnable
 
 	public int serveCustomer() throws InterruptedException
 	{
-		if (myServiceQueue.getNumberCustomersInLine() > 0)
+		while (myServiceQueue.getNumberCustomersInLine() > 0)
 		{
 			this.waitWhileSuspended();
-			myServiceQueue.setNumberCustomersInLine(myServiceQueue.getNumberCustomersInLine() - 1);
-			myServiceQueue.setNumberCustomersServedSoFar(myServiceQueue.getNumberCustomersServedSoFar() + 1);
-			System.out.println(myServiceQueue.getNumberCustomersServedSoFar());
-
 			try
 			{
-				Thread.sleep(generateServiceTime());
+				long o = generateServiceTime();
+				Thread.sleep(o);
+				System.out.println("Waiting Time for serving: " + o);
 			}
 
 			catch (InterruptedException e)
 			{
 				e.printStackTrace();
 			}
-			return myServiceQueue.getNumberCustomersServedSoFar();
+
+			myServiceQueue.serveCustomer();
+			System.out.println("Customers Served So Far: " + myServiceQueue.getNumberCustomersServedSoFar());
+			System.out.println("Customers in Line: " + myServiceQueue.getNumberCustomersInLine());
+
+
+
+		}
+		if (myServiceQueue.getNumberCustomersInLine() == 0)
+		{
+			return 0;
 		}
 		else
 			return 0;
