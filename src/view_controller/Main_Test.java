@@ -42,6 +42,7 @@ public class Main_Test
 		//Making x Cashiers
 		for(int i =0; i < myNumCashiers; i++)
 		{
+			//chad
 			myCashier = new Cashier(500, myServiceQueue);
 			myCashiers.add(myCashier);
 			myCashiers.get(i).start();
