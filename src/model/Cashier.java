@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Random;
-
 /**
  * Created by chadbaily on 4/12/16.
  */
@@ -66,8 +64,7 @@ public abstract class Cashier implements Runnable
 	 */
 	public int generateServiceTime()
 	{
-		Random random = new Random();
-		return random.nextInt(myMaxTimeOfService) + 1;
+		return 0;
 	}
 
 	/**

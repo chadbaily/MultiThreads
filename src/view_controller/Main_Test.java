@@ -3,6 +3,7 @@ package view_controller;
 import model.Cashier;
 import model.Customer;
 import model.ServiceQueue;
+import model.UniformCashier;
 
 import java.util.Scanner;
 import java.util.Vector;
@@ -16,11 +17,11 @@ public class Main_Test
 	{
 		int myNumCustomers;
 		int myNumCashiers;
-		Cashier myCashier;
+		UniformCashier myUniformCashier;
 		ServiceQueue myServiceQueue;
 		Customer customer;
 		Vector<Customer> myCustomers;
-		Vector<Cashier> myCashiers;
+		Vector<UniformCashier> myCashiers;
 
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Enter the amount of Cashiers and Customers");
@@ -42,9 +43,8 @@ public class Main_Test
 		//Making x Cashiers
 		for(int i =0; i < myNumCashiers; i++)
 		{
-			//chad
-			myCashier = new Cashier(500, myServiceQueue);
-			myCashiers.add(myCashier);
+			myUniformCashier = new UniformCashier(500, myServiceQueue);
+			myCashiers.add(myUniformCashier);
 			myCashiers.get(i).start();
 		}
 
