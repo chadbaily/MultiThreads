@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * Created by chadbaily on 4/12/16.
  */
-public class Cashier implements Runnable
+public abstract class Cashier implements Runnable
 {
 	private int myMaxTimeOfService;
 	private Thread myThread;

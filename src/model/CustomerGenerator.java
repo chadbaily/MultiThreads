@@ -6,9 +6,16 @@ package model;
 public class CustomerGenerator implements Runnable
 {
 	private int myMaxTimeBetweenCustomers;
+	private int myMaxNumberOfCustomers;
+	private ServiceQueueManager myServiceQueueManager;
+	private Customer myCustomer;
 
-	public CustomerGenerator(int maxTimeBetweenCustomers, ServiceQueueManager serviceQueueManager, int maxNumberOfCustomers)
+	public CustomerGenerator(int maxTimeBetweenCustomers, ServiceQueueManager serviceQueueManager,
+			int maxNumberOfCustomers)
 	{
+		myMaxTimeBetweenCustomers = maxTimeBetweenCustomers;
+		myMaxNumberOfCustomers = maxNumberOfCustomers;
+		myServiceQueueManager = serviceQueueManager;
 
 	}
 
@@ -19,6 +26,7 @@ public class CustomerGenerator implements Runnable
 
 	public Customer generateCustomer()
 	{
+		myCustomer = new Customer();
 		return null;
 	}
 
@@ -35,5 +43,15 @@ public class CustomerGenerator implements Runnable
 	public int getMyMaxTimeBetweenCustomers()
 	{
 		return myMaxTimeBetweenCustomers;
+	}
+
+	public int getMyMaxNumberOfCustomers()
+	{
+		return myMaxNumberOfCustomers;
+	}
+
+	public ServiceQueueManager getMyServiceQueueManager()
+	{
+		return myServiceQueueManager;
 	}
 }

@@ -8,16 +8,19 @@ import java.util.Random;
 public class UniformCashier extends Cashier
 {
 	private Random myRandom;
+	private int myMaxTimeOfService;
 
 	public UniformCashier(int maxTimeService, ServiceQueue serviceQueue)
 	{
 		super(maxTimeService, serviceQueue);
 	}
 
+	/**
+	 * Generates a random time for the cashier
+	 */
 	public int generateServiceTime()
 	{
 		myRandom = new Random();
-
-		return myRandom.nextInt(1000 - 1 + 1) + 1;
+		return myRandom.nextInt(myMaxTimeOfService) + 1;
 	}
 }
