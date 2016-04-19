@@ -1,12 +1,13 @@
 package view_controller;
 
-import model.Cashier;
 import model.Customer;
 import model.ServiceQueue;
 import model.UniformCashier;
 
 import java.util.Scanner;
 import java.util.Vector;
+
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 
 /**
  * Created by Chad Baily on 4/14/2016.
@@ -41,14 +42,15 @@ public class Main_Test
 		}
 
 		//Making x Cashiers
-		for(int i =0; i < myNumCashiers; i++)
+		for (int i = 0; i < myNumCashiers; i++)
 		{
 			myUniformCashier = new UniformCashier(500, myServiceQueue);
 			myCashiers.add(myUniformCashier);
 			myCashiers.get(i).start();
 		}
 
-		//		myServiceQueue.dequeue();
-		//		System.out.println(myServiceQueue.getNumberCustomersInLine());
+
+
+
 	}
 }

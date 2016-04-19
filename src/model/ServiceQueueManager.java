@@ -11,6 +11,7 @@ public class ServiceQueueManager
 	private long myTotalWaitTime;
 	private long myTotalServiceTime;
 	private long myTotalIdleTime;
+	private int myTotalServed;
 	private float myAverageWaitTime;
 	private float myAverageServiceTime;
 	private long myAverageIdleTime;
@@ -36,27 +37,52 @@ public class ServiceQueueManager
 
 	public int totalServedSoFar()
 	{
-		return 0;
+		for (int i = 0; i < myServiceQueues.length; i++)
+		{
+			myTotalServed = myTotalServed + myServiceQueues[i].getNumberCustomersServedSoFar();
+		}
+		return myTotalServed;
 	}
 
 	public long getTotalWaitTime()
 	{
-		return myTotalWaitTime;
+		for (int i = 0; i < myServiceQueues.length; i++)
+		{
+			myTotalWaitTime = myTotalWaitTime + myServiceQueues[i].getTotalWaitTime();
+		}
+		return myTotalServed;
 	}
 
 	public long getTotalServiceTime()
 	{
+		for (int i = 0; i < myServiceQueues.length; i++)
+		{
+			myTotalServiceTime = myTotalServiceTime + myServiceQueues[i].getTotalServiceTime();
+		}
 		return myTotalServiceTime;
 	}
 
 	public long getTotalIdleTime()
 	{
+		for (int i = 0; i < myServiceQueues.length; i++)
+		{
+			myTotalIdleTime = myTotalIdleTime + myServiceQueues[i].getTotalIdleTime();
+		}
 		return myTotalIdleTime;
 	}
 
 	public ServiceQueue determineShortestQueue()
 	{
-		return null;
+		ServiceQueue queue = myServiceQueues[0];
+		for (int i = 0; i < myServiceQueues.length; i++)
+		{
+			if (queue.getNumberCustomersInLine() > myServiceQueues[i].getNumberCustomersInLine())
+			{
+				queue = myServiceQueues[i];
+				System.out.println("Shortest Queue: " + queue);
+			}
+		}
+		return queue;
 	}
 
 	public float getAverageWaitTime()
@@ -74,8 +100,8 @@ public class ServiceQueueManager
 		return myAverageIdleTime;
 	}
 
-	public void setNumberOfServiceQueues(int NumberOfServiceQueues)
+	public void setNumberOfServiceQueues(int numberOfServiceQueues)
 	{
-		myNumberOfServiceQueues = NumberOfServiceQueues;
+		myNumberOfServiceQueues = numberOfServiceQueues;
 	}
 }
