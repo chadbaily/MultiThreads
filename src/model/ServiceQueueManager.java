@@ -35,6 +35,11 @@ public class ServiceQueueManager
 		myTotalIdleTime = 0;
 	}
 
+	/**
+	 * Loops through the service queue, getting each total served, then adding it to myTotalServed
+	 *
+	 * @return The total customers served in all service queues
+	 */
 	public int totalServedSoFar()
 	{
 		for (int i = 0; i < myServiceQueues.length; i++)
@@ -44,6 +49,11 @@ public class ServiceQueueManager
 		return myTotalServed;
 	}
 
+	/**
+	 * Loops through the service queue, getting each total wait time, then adds it to myTotalWaitTime
+	 *
+	 * @return The total wait time for all the service queues
+	 */
 	public long getTotalWaitTime()
 	{
 		for (int i = 0; i < myServiceQueues.length; i++)
@@ -53,6 +63,11 @@ public class ServiceQueueManager
 		return myTotalServed;
 	}
 
+	/**
+	 * Loops through the service queue, getting each total service time, then adds it to myTotalServiceTime
+	 *
+	 * @return The total service time for all the service queues
+	 */
 	public long getTotalServiceTime()
 	{
 		for (int i = 0; i < myServiceQueues.length; i++)
@@ -62,6 +77,11 @@ public class ServiceQueueManager
 		return myTotalServiceTime;
 	}
 
+	/**
+	 * Loops through the service queue, getting each total idle time, then adds it to myTotalIdleTime
+	 *
+	 * @return The total idle time for all the service queues
+	 */
 	public long getTotalIdleTime()
 	{
 		for (int i = 0; i < myServiceQueues.length; i++)
@@ -71,6 +91,12 @@ public class ServiceQueueManager
 		return myTotalIdleTime;
 	}
 
+	/**
+	 * Loops through all the service queues, getting each length, and compares them. Sets the shortest to a temp
+	 * variable
+	 *
+	 * @return The shortest service queue in the service queue manager
+	 */
 	public ServiceQueue determineShortestQueue()
 	{
 		ServiceQueue queue = myServiceQueues[0];

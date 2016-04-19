@@ -35,6 +35,7 @@ public class CustomerGenerator implements Runnable
 	{
 		for (int i = 0; i < myMaxNumberOfCustomers; i++)
 		{
+
 		}
 	}
 
