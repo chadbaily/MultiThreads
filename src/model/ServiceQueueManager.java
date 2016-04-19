@@ -8,20 +8,19 @@ public class ServiceQueueManager
 	private final int MAX_NUMBER_OF_QUEUES = 5;
 	private int myNumberOfServiceQueues;
 	private ServiceQueue[] myServiceQueues;
-	private int myTotalWaitTime;
-	private int myTotalServiceTime;
-	private int myTotalIdleTime;
+	private long myTotalWaitTime;
+	private long myTotalServiceTime;
+	private long myTotalIdleTime;
 	private float myAverageWaitTime;
 	private float myAverageServiceTime;
-	private int myAverageIdleTime;
-	private int myPresentTime;
-	private int myStartTime;
+	private long myAverageIdleTime;
+	private long myPresentTime;
+	private long myStartTime;
 
 	public ServiceQueueManager()
 	{
 		for (int i = 0; i < MAX_NUMBER_OF_QUEUES; i++)
 		{
-			System.out.println(i);
 			myServiceQueues = new ServiceQueue[i];
 		}
 		myTotalWaitTime = 0;
@@ -29,8 +28,8 @@ public class ServiceQueueManager
 		myAverageServiceTime = 0;
 		myAverageWaitTime = 0;
 		myNumberOfServiceQueues = 0;
-		myPresentTime = 0;
-		myStartTime = 0;
+		myPresentTime = System.currentTimeMillis();
+		myStartTime = System.currentTimeMillis();
 		myTotalServiceTime = 0;
 		myTotalIdleTime = 0;
 	}
@@ -40,19 +39,19 @@ public class ServiceQueueManager
 		return 0;
 	}
 
-	public int getMyTotalWaitTime()
+	public long getTotalWaitTime()
 	{
-		return 0;
+		return myTotalWaitTime;
 	}
 
-	public int getMyTotalServiceTime()
+	public long getTotalServiceTime()
 	{
-		return 0;
+		return myTotalServiceTime;
 	}
 
-	public int getMyTotalIdleTime()
+	public long getTotalIdleTime()
 	{
-		return 0;
+		return myTotalIdleTime;
 	}
 
 	public ServiceQueue determineShortestQueue()
@@ -60,19 +59,23 @@ public class ServiceQueueManager
 		return null;
 	}
 
-	public float getMyAverageWaitTime()
+	public float getAverageWaitTime()
 	{
 		return myAverageWaitTime;
 	}
 
-	public float getMyAverageServiceTime()
+	public float getAverageServiceTime()
 	{
 		return myAverageServiceTime;
 	}
 
-	public int getMyAverageIdleTime()
+	public long getAverageIdleTime()
 	{
 		return myAverageIdleTime;
 	}
 
+	public void setNumberOfServiceQueues(int NumberOfServiceQueues)
+	{
+		myNumberOfServiceQueues = NumberOfServiceQueues;
+	}
 }

@@ -9,6 +9,7 @@ public class CustomerGenerator implements Runnable
 	private int myMaxNumberOfCustomers;
 	private ServiceQueueManager myServiceQueueManager;
 	private Customer myCustomer;
+	private Thread myThread;
 
 	public CustomerGenerator(int maxTimeBetweenCustomers, ServiceQueueManager serviceQueueManager,
 			int maxNumberOfCustomers)
@@ -27,17 +28,39 @@ public class CustomerGenerator implements Runnable
 	public Customer generateCustomer()
 	{
 		myCustomer = new Customer();
-		return null;
+		return myCustomer;
+	}
+
+	private void makeCustomers()
+	{
+		for (int i = 0; i < myMaxNumberOfCustomers; i++)
+		{
+		}
 	}
 
 	public void run()
 	{
+		synchronized (this)
+		{
+			this.makeCustomers();
 
+		}
 	}
+
+	/**
+	 * Starts the thread for the customer generator, catches an exception if the thread is already started
+	 */
 
 	public void start()
 	{
-
+		try
+		{
+			myThread.start();
+		}
+		catch (IllegalThreadStateException e)
+		{
+			System.out.println("Thread already started");
+		}
 	}
 
 	public int getMyMaxTimeBetweenCustomers()
