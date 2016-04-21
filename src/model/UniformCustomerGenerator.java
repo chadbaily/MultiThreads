@@ -8,15 +8,17 @@ import java.util.Random;
 public class UniformCustomerGenerator
 {
 	private Random myRandom;
+	private int myMaxTimeBeteenCustomers;
+	private ServiceQueueManager myServiceQueueManager;
 
 	public UniformCustomerGenerator(int maxTimeBetweenCustomers, ServiceQueueManager serviceQueueManager)
 	{
-
+		myMaxTimeBeteenCustomers = maxTimeBetweenCustomers;
+		myServiceQueueManager = serviceQueueManager;
 	}
 
 	public int generateTimeBetweenCustomers()
 	{
 		return 0;
-
 	}
 }

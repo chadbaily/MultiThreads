@@ -97,18 +97,30 @@ public class ServiceQueueManager
 	 *
 	 * @return The shortest service queue in the service queue manager
 	 */
-	public ServiceQueue determineShortestQueue()
+	public int determineShortestQueue()
 	{
+		int queueIndex = 0;
 		ServiceQueue queue = myServiceQueues[0];
 		for (int i = 0; i < myServiceQueues.length; i++)
 		{
 			if (queue.getNumberCustomersInLine() > myServiceQueues[i].getNumberCustomersInLine())
 			{
 				queue = myServiceQueues[i];
+				queueIndex = i;
 				System.out.println("Shortest Queue: " + queue);
 			}
 		}
-		return queue;
+		return queueIndex;
+	}
+
+	/**
+	 * Method to add the customer to the shortest service queue
+	 * @return
+	 */
+	public void addToShortestQueue(Customer customer, int index)
+	{
+
+		myServiceQueues[index].enqueue(customer);
 	}
 
 	public float getAverageWaitTime()

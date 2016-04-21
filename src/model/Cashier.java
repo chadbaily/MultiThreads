@@ -62,10 +62,7 @@ public abstract class Cashier implements Runnable
 	 *
 	 * @return the time the cashier needs to wait before serving a customer
 	 */
-	public int generateServiceTime()
-	{
-		return 0;
-	}
+	public abstract int generateServiceTime();
 
 	/**
 	 * Is called when start is, calls the serveCustomer()

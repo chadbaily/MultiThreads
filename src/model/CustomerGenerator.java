@@ -3,7 +3,7 @@ package model;
 /**
  * Created by chadbaily on 4/12/16.
  */
-public class CustomerGenerator implements Runnable
+public abstract class CustomerGenerator implements Runnable
 {
 	private int myMaxTimeBetweenCustomers;
 	private int myMaxNumberOfCustomers;
@@ -20,10 +20,7 @@ public class CustomerGenerator implements Runnable
 
 	}
 
-	public int generateTimeBetweenCustomers()
-	{
-		return 0;
-	}
+	public abstract int generateTimeBetweenCustomers();
 
 	public Customer generateCustomer()
 	{
@@ -31,11 +28,15 @@ public class CustomerGenerator implements Runnable
 		return myCustomer;
 	}
 
-	private void makeCustomers()
+	private void makeAllCustomers()
 	{
+		int o = 0;
 		for (int i = 0; i < myMaxNumberOfCustomers; i++)
 		{
-
+			int time = this.generateTimeBetweenCustomers();
+			Customer customer = generateCustomer();
+			o = myServiceQueueManager.determineShortestQueue();
+			myServiceQueueManager.addToShortestQueue(customer, o);
 		}
 	}
 
@@ -43,8 +44,7 @@ public class CustomerGenerator implements Runnable
 	{
 		synchronized (this)
 		{
-			this.makeCustomers();
-
+			this.makeAllCustomers();
 		}
 	}
 
