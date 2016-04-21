@@ -17,8 +17,13 @@ public class UniformCustomerGenerator
 		myServiceQueueManager = serviceQueueManager;
 	}
 
+	/**
+	 * Method to generate the time between customers that are created?
+	 * @return
+	 */
 	public int generateTimeBetweenCustomers()
 	{
-		return 0;
+		myRandom = new Random();
+		return myRandom.nextInt(myMaxTimeBeteenCustomers) + 1;
 	}
 }
