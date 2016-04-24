@@ -5,16 +5,21 @@ import java.util.Random;
 /**
  * Created by chadbaily on 4/12/16.
  */
-public class UniformCustomerGenerator
+public class UniformCustomerGenerator extends CustomerGenerator
 {
 	private Random myRandom;
 	private int myMaxTimeBeteenCustomers;
 	private ServiceQueueManager myServiceQueueManager;
+	private int myMaxNumberOfCustomers;
 
-	public UniformCustomerGenerator(int maxTimeBetweenCustomers, ServiceQueueManager serviceQueueManager)
+	public UniformCustomerGenerator(int maxTimeBetweenCustomers, ServiceQueueManager serviceQueueManager,
+			int maxNumberOfCustomers)
 	{
+		super(maxTimeBetweenCustomers, serviceQueueManager, maxNumberOfCustomers);
+
 		myMaxTimeBeteenCustomers = maxTimeBetweenCustomers;
 		myServiceQueueManager = serviceQueueManager;
+		myMaxNumberOfCustomers = maxNumberOfCustomers;
 	}
 
 	/**

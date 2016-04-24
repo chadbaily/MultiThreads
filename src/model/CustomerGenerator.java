@@ -14,6 +14,7 @@ public abstract class CustomerGenerator implements Runnable
 	public CustomerGenerator(int maxTimeBetweenCustomers, ServiceQueueManager serviceQueueManager,
 			int maxNumberOfCustomers)
 	{
+		System.out.println("Making Customer Generator");
 		myMaxTimeBetweenCustomers = maxTimeBetweenCustomers;
 		myMaxNumberOfCustomers = maxNumberOfCustomers;
 		myServiceQueueManager = serviceQueueManager;
@@ -24,12 +25,14 @@ public abstract class CustomerGenerator implements Runnable
 
 	public Customer generateCustomer()
 	{
+
 		myCustomer = new Customer();
 		return myCustomer;
 	}
 
 	private void makeAllCustomers()
 	{
+		System.out.println("Making all customer");
 		int o = 0;
 		for (int i = 0; i < myMaxNumberOfCustomers; i++)
 		{
@@ -42,10 +45,20 @@ public abstract class CustomerGenerator implements Runnable
 
 	public void run()
 	{
-		synchronized (this)
+		try
 		{
-			this.makeAllCustomers();
+
+			synchronized (this)
+			{
+				this.makeAllCustomers();
+			}
 		}
+		catch (NullPointerException e)
+		{
+			System.exit(0);
+			System.out.println("No More Customers: " + e);
+		}
+
 	}
 
 	/**
@@ -61,6 +74,11 @@ public abstract class CustomerGenerator implements Runnable
 		catch (IllegalThreadStateException e)
 		{
 			System.out.println("Thread already started");
+		}
+		catch (NullPointerException e)
+		{
+			System.out.println("Null Pointer");
+			System.out.println(e);
 		}
 	}
 
