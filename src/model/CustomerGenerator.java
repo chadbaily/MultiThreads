@@ -14,7 +14,6 @@ public abstract class CustomerGenerator implements Runnable
 	public CustomerGenerator(int maxTimeBetweenCustomers, ServiceQueueManager serviceQueueManager,
 			int maxNumberOfCustomers)
 	{
-		System.out.println("Making Customer Generator");
 		myMaxTimeBetweenCustomers = maxTimeBetweenCustomers;
 		myMaxNumberOfCustomers = maxNumberOfCustomers;
 		myServiceQueueManager = serviceQueueManager;
@@ -32,7 +31,6 @@ public abstract class CustomerGenerator implements Runnable
 
 	private void makeAllCustomers()
 	{
-		System.out.println("Making all customer");
 		int o = 0;
 		for (int i = 0; i < myMaxNumberOfCustomers; i++)
 		{
