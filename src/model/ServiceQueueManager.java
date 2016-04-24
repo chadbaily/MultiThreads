@@ -20,11 +20,11 @@ public class ServiceQueueManager
 
 	public ServiceQueueManager()
 	{
-		myServiceQueues = new ServiceQueue[5];
-		for (int i = 0; i < MAX_NUMBER_OF_QUEUES; i++)
+		myNumberOfServiceQueues =3;
+		myServiceQueues = new ServiceQueue[3];
+		for (int i = 0; i < myNumberOfServiceQueues; i++)
 		{
 			myServiceQueues[i] = new ServiceQueue();
-			myNumberOfServiceQueues ++;
 		}
 		myTotalWaitTime = 0;
 		myAverageIdleTime = 0;
@@ -108,7 +108,9 @@ public class ServiceQueueManager
 			{
 				queue = myServiceQueues[i];
 				queueIndex = i;
-				System.out.println("Shortest Queue: " + i);
+				//Delete me later
+				System.out.println("Shortest Queue: " + i + " with " + myServiceQueues[i].getNumberCustomersInLine()
+						+ " customers");
 			}
 		}
 		return queueIndex;
@@ -116,6 +118,7 @@ public class ServiceQueueManager
 
 	/**
 	 * Method to add the customer to the shortest service queue
+	 *
 	 * @return
 	 */
 	public void addToShortestQueue(Customer customer, int index)

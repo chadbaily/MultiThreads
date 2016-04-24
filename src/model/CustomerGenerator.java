@@ -37,6 +37,7 @@ public abstract class CustomerGenerator implements Runnable
 			int time = this.generateTimeBetweenCustomers();
 			Customer customer = generateCustomer();
 			o = myServiceQueueManager.determineShortestQueue();
+			System.out.println(i);
 			myServiceQueueManager.addToShortestQueue(customer, o);
 		}
 	}

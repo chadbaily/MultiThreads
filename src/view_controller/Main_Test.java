@@ -21,7 +21,7 @@ public class Main_Test
 		myServiceQueueManager = new ServiceQueueManager();
 		myCustomerGenerator = new UniformCustomerGenerator(500, myServiceQueueManager, 500);
 		myCustomerGenerator.run();
-		myUniformCashiers = new UniformCashier[5];
+		myUniformCashiers = new UniformCashier[3];
 
 		for(int i =0; i < myServiceQueueManager.getNumberOfServiceQueues(); i++)
 		{
@@ -29,6 +29,7 @@ public class Main_Test
 			myUniformCashiers[i] = new UniformCashier(500, temp);
 			myUniformCashiers[i].run();
 		}
+
 
 
 
