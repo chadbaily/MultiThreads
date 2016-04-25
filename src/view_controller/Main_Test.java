@@ -27,8 +27,11 @@ public class Main_Test
 		{
 			ServiceQueue temp = myServiceQueueManager.getServiceQueues()[i];
 			myUniformCashiers[i] = new UniformCashier(500, temp);
-			myUniformCashiers[i].run();
+			myUniformCashiers[i].start();
+
 		}
+
+
 
 
 
