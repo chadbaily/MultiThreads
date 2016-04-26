@@ -104,7 +104,7 @@ public class ServiceQueueManager
 		ServiceQueue queue = myServiceQueues[0];
 		for (int i = 0; i < myServiceQueues.length; i++)
 		{
-			if (queue.getNumberCustomersInLine() > myServiceQueues[i].getNumberCustomersInLine())
+			if (queue.getNumberCustomersInLine() > myServiceQueues[i].getNumberCustomersInLine() || myServiceQueues[i] == queue)
 			{
 				queue = myServiceQueues[i];
 				queueIndex = i;
