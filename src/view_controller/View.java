@@ -1,169 +1,221 @@
 package view_controller;
 
-/**
- * View for a Poker Game, has a frame, 3 JPanels (Background, each players cards(5)), multiple buttons, and JLabels to
- * indicate what is happening in the game
- *
- * @author chadbaily
- */
-
-import javax.swing.*;
 import java.awt.*;
 import java.lang.reflect.Method;
+import javax.swing.*;
 
-@SuppressWarnings("serial") public class View extends Frame
+@SuppressWarnings("serial")
+public class View extends JFrame
 {
+	// Constants
+	private final int TELLER_WIDTH = 75;
+	private final int TELLER_HEIGHT = 85;
+	private final String TELLER_IMG = "images/cashier.png";
+	private final String FACE_IMG = "images/face.jpg";
+	private final int COUNTER_BOX_WIDTH = 50;
+	private final int COUNTER_BOX_HEIGHT = 20;
+	private final int CUSTOMER_WIDTH = 50;
+	private final int CUSTOMER_HEIGHT = 50;
+	private final int ROW_1 = 400;
+	private final int ROW_2 = 460;
+	private final int MAX_PEOPLE_IN_LINE = 5;
+	private final int MAX_NUM_OF_TELLERS = 2;
 
-	/*
-	 * Properties for the view
-	 */
-	public final static int myNumSquares = 5;
-	private JLabel[] myCompCardView;
-	private JLabel[] myPlayerCardView;
-	private JPanel myCompCardPanel;
-	private JPanel myPlayerCardPanel;
-	private ButtonListener[] myCardListener;
-	private ButtonListener myStartButtonListener;
-	private ButtonListener myDiscardButtonListener;
+	// Data Members
+	private Image myScaledImage;
 	private Controller myController;
-	private JButton myStartButton;
-	private JLabel myLabel;
-	private JLabel myPlayerInfo;
-	private JLabel myCPlayerInfo;
-	private JLabel myGameInfo;
-	private JLabel myBackgroundLabel;
-	private JFrame myFrame;
-	private ImageIcon myBlankImage;
-	private ImageIcon myBackgroundImage;
-	private JButton myDiscardButton;
+	private Container myContentPane;
+	private JLabel[] myTotalServed;
+	private ButtonListener myStartPauseListener;
+	private JLabel[][] myCustomer;
+	private JButton myStartPauseButton;
+	private JLabel[] myTeller;
+	private JPanel mySimPanel;
 
-	private JTextArea myOverallStats;
-	private JTextArea myCashierStats;
-	private JScrollPane myOverallStatsScroll;
+	// Chad
+	private JLabel myGenerateTime;
+	private JLabel myNumCustomers;
+	private JLabel myServiceQueues;
+	private JLabel myMaxServiceTime;
+	private JLabel myMaxCashiers;
+	private JPanel myInfoPanel;
+	
+	// Constructor
 
 	/**
-	 methods for the view
-	 */
-
-	/**
-	 * View constructor used to lay out the view, sets up the initial view for what the player sees
-	 * <p>
-	 * <pre>
-	 * pre:  none
-	 * post: the view is set up and initialized
-	 * </pre>
+	 * Constructor that creates the view.
+	 * 
+	 * @param controller
+	 *            the SimulationController that gives function to the buttons.
 	 */
 	public View(Controller controller)
 	{
-		myFrame = new JFrame("Service Queue Simulation");
-		myFrame.setSize(600, 600);
-		Box myLayout = new Box(BoxLayout.Y_AXIS);
+		Image face = Toolkit.getDefaultToolkit().getImage(FACE_IMG);
+		myScaledImage = face.getScaledInstance(CUSTOMER_WIDTH, CUSTOMER_HEIGHT, Image.SCALE_SMOOTH);
 
-		/*
-		Creating the button
-		 */
-		String myButtonText = "Start Game";
-		myStartButton = new JButton(myButtonText);
+		myController = controller;
 
-		myOverallStats = new JTextArea(
-				"phdakjdgsgfhkfghasgfhjsgfhasgfahsgfhfahsgfdsfhgdsfgsdjhfgajhfgashfgashdgfhsdgfhajsdfgjahsdgfajkhsfgajkhsgfajshfgahjsfgajhsdgfajhsfgajhksdfgasjfgasdhjfgahjsdfgajhsfgahjsdfgadshjfg");
+		// Chad testing
+		myNumCustomers = new JLabel("Num Customers");
+		myServiceQueues = new JLabel("");
+		myMaxServiceTime = new JLabel("Max service time");
+		myMaxCashiers = new JLabel("Max Num Cashiers");
 
-		myOverallStats.setMaximumSize(myOverallStats.getPreferredSize());
-		myCashierStats = new JTextArea(myButtonText);
+		// Start/Pause Button
+		myStartPauseButton = new JButton("Start");
 
-		myCashierStats.setMaximumSize(myOverallStats.getPreferredSize());
-		//		myOverallStatsScroll = new JScrollPane(myOverallStats);
-		//
-		//		myLayout.add(myOverallStatsScroll);
-		myLayout.add(myCashierStats);
-		myLayout.add(myOverallStats);
+		this.associateListeners(myController);
 
-		myLayout.add(myStartButton);
-		myFrame.add(myLayout, BorderLayout.EAST);
+		// Frame info
+		this.setSize(600, 600);
+		this.setLocation(100, 100);
+		this.setTitle("Sample Queue MVC");
+		this.setResizable(false);
 
-		//				this.associateListeners(controller);
-		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		myFrame.setVisible(true);
+		myContentPane = getContentPane();
+		myContentPane.setLayout(new BorderLayout());
+
+		// Sim Panel
+		mySimPanel = new JPanel();
+		mySimPanel.setBorder(BorderFactory.createLoweredBevelBorder());
+		mySimPanel.setLayout(null);
+
+		//Info Panel
+		myInfoPanel = new JPanel();
+		myInfoPanel.setLayout(new BoxLayout(myInfoPanel, BoxLayout.PAGE_AXIS));
+		
+		// Customer Served Counter
+		myTotalServed = new JLabel[MAX_NUM_OF_TELLERS];
+
+		for (int i = 0; i < myTotalServed.length; i++)
+		{
+			myTotalServed[i] = new JLabel("0");
+			myTotalServed[i].setSize(COUNTER_BOX_WIDTH, COUNTER_BOX_HEIGHT);
+			myTotalServed[i].setLocation(65 + (CUSTOMER_WIDTH * i), ROW_2);
+			myTotalServed[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+			mySimPanel.add(myTotalServed[i]);
+		}
+
+		// Teller locations
+		myTeller = new JLabel[MAX_NUM_OF_TELLERS];
+
+		for (int i = 0; i < MAX_NUM_OF_TELLERS; i++)
+		{
+			myTeller[i] = new JLabel(new ImageIcon(TELLER_IMG));
+			myTeller[i].setSize(TELLER_WIDTH, TELLER_HEIGHT);
+			myTeller[i].setLocation(50 + (CUSTOMER_WIDTH * i), ROW_1);
+			myTeller[i].setVisible(true);
+			mySimPanel.add(myTeller[i]);
+		}
+
+		// Customer Lines
+		myCustomer = new JLabel[MAX_NUM_OF_TELLERS][MAX_PEOPLE_IN_LINE];
+		for (int i = 0; i < MAX_NUM_OF_TELLERS; i++)
+		{
+			for (int j = 0; j < MAX_PEOPLE_IN_LINE; j++)
+			{
+				myCustomer[i][j] = new JLabel();
+				myCustomer[i][j].setSize(CUSTOMER_WIDTH, CUSTOMER_HEIGHT);
+				myCustomer[i][j].setLocation(65 + (CUSTOMER_WIDTH * i), 325 - (50 * j));
+				myCustomer[i][j].setVisible(true);
+				mySimPanel.add(myCustomer[i][j]);
+			}
+		}
+
+		// Background
+		JLabel bg;
+		bg = new JLabel(new ImageIcon("images/background.png"));
+		bg.setSize(500, 500);
+		bg.setLocation(0, 0);
+		mySimPanel.add(bg);
+		myContentPane.add(mySimPanel, BorderLayout.CENTER);
+		myInfoPanel.add(myStartPauseButton, BorderLayout.EAST);
+		myInfoPanel.add(myNumCustomers, BorderLayout.EAST);
+		myInfoPanel.add(myServiceQueues, BorderLayout.EAST);
+		myInfoPanel.add(myMaxServiceTime, BorderLayout.EAST);
+		myInfoPanel.add(myMaxCashiers, BorderLayout.EAST);
+		myContentPane.add(myInfoPanel, BorderLayout.EAST);
+		this.setVisible(true);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+	}
+
+	//////////////////////////////////////////
+	// Methods //
+	//////////////////////////////////////////
+
+	public void changeStartPause()
+	{
+		if (myStartPauseButton.getText().equals("Start"))
+		{
+			myStartPauseButton.setText("Pause");
+		}
+		else
+		{
+			myStartPauseButton.setText("Start");
+		}
+	}
+
+	public void setCustomersInLine(int queue, int numInLine)
+	{
+		System.out.println("Queue: " + queue + "  numInLine = " + numInLine);
+
+		myTeller[queue].setIcon(new ImageIcon(TELLER_IMG));
+
+		for (int i = 0; i < MAX_PEOPLE_IN_LINE; i++)
+		{
+			myCustomer[queue][i].setVisible(false);
+		}
+		try
+		{
+			for (int i = 0; i < numInLine && i < MAX_PEOPLE_IN_LINE; i++)
+			{
+				myCustomer[queue][i].setVisible(true);
+				myCustomer[queue][i].setIcon(new ImageIcon(myScaledImage));
+			}
+		}
+		catch (NullPointerException e)
+		{
+
+		}
 	}
 
 	/**
-	 * Associates each component's listener with the controller and the correct method to invoke when triggered.
-	 * <p>
-	 * <pre>
-	 * pre:  the controller class has be instantiated
-	 * post: all listeners have been associated to the controller
-	 *       and the method it must invoke
-	 * </pre>
+	 * Associates the button with the appropriate method
+	 * 
+	 * @param controller
+	 *            The controller in which the method is included.
 	 */
-	public void associateListeners(Controller controller)
+	private void associateListeners(Controller controller)
 	{
 		Class<? extends Controller> controllerClass;
-		Method startGameMethod, selectMethod, discardMethod;
-		Class<?>[] classArgs;
+		Method startPauseMethod;
 
-		controllerClass = controller.getClass();
+		controllerClass = myController.getClass();
 
-		startGameMethod = null;
-		selectMethod = null;
-		discardMethod = null;
-		classArgs = new Class[1];
+		startPauseMethod = null;
+
 		try
 		{
-			classArgs[0] = Class.forName("java.lang.Integer");
+			startPauseMethod = controllerClass.getMethod("startPause", (Class<?>[]) null);
 		}
-		catch (ClassNotFoundException e)
+		catch (SecurityException e)
 		{
 			String error;
+
 			error = e.toString();
 			System.out.println(error);
 		}
-		try
-		{
-			selectMethod = controllerClass.getMethod("border", classArgs);
-			startGameMethod = controllerClass.getMethod("startGame", (Class<?>[]) null);
-			discardMethod = controllerClass.getMethod("discard", (Class<?>[]) null);
-		}
-
-		catch (NoSuchMethodException exception)
+		catch (NoSuchMethodException e)
 		{
 			String error;
 
-			error = exception.toString();
-			System.out.println(error);
-		}
-		catch (SecurityException exception)
-		{
-			String error;
-
-			error = exception.toString();
+			error = e.toString();
 			System.out.println(error);
 		}
 
-		int i;
-		Integer[] args;
+		myStartPauseListener = new ButtonListener(myController, startPauseMethod, null);
 
-		for (i = 0; i < myNumSquares; i++)
-		{
-			args = new Integer[1];
-			args[0] = new Integer(i);
-			myCardListener[i] = new ButtonListener(myController, selectMethod, args);
-			myPlayerCardView[i].addMouseListener(myCardListener[i]);
-		}
-
-		myStartButtonListener = new ButtonListener(controller, startGameMethod, null);
-		myDiscardButtonListener = new ButtonListener(controller, discardMethod, null);
-		myDiscardButton.addMouseListener(myDiscardButtonListener);
-		myStartButton.addMouseListener(myStartButtonListener);
-	}
-
-	/**
-	 * Method to close the frame and quit the Java App.
-	 */
-	public void quit()
-	{
-		myFrame.setVisible(false);
-		myFrame.dispose();
-		System.exit(0);
+		myStartPauseButton.addMouseListener(myStartPauseListener);
 	}
 
 }
