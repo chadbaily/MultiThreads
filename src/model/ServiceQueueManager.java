@@ -63,6 +63,15 @@ public class ServiceQueueManager
 		}
 		return myTotalServed;
 	}
+	
+	/**
+	 * Method that gets the total amount of customers in a service queue
+	 */
+	public int getNumCustomers(int queueNum)
+	{
+		int i =myServiceQueues[queueNum].getNumberCustomersInLine();
+		return i;
+	}
 
 	/**
 	 * Loops through the service queue, getting each total service time, then adds it to myTotalServiceTime

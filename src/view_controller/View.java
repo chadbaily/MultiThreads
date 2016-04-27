@@ -19,7 +19,7 @@ public class View extends JFrame
 	private final int ROW_1 = 400;
 	private final int ROW_2 = 460;
 	private final int MAX_PEOPLE_IN_LINE = 5;
-	private final int MAX_NUM_OF_TELLERS = 2;
+	private final int MAX_NUM_OF_TELLERS = 5;
 
 	// Data Members
 	private Image myScaledImage;
@@ -32,14 +32,14 @@ public class View extends JFrame
 	private JLabel[] myTeller;
 	private JPanel mySimPanel;
 
-	// Chad
-	private JLabel myGenerateTime;
+	// Chad Testing
 	private JLabel myNumCustomers;
 	private JLabel myServiceQueues;
 	private JLabel myMaxServiceTime;
 	private JLabel myMaxCashiers;
 	private JPanel myInfoPanel;
-	
+	private JTextField[] myTextFields;
+
 	// Constructor
 
 	/**
@@ -55,11 +55,22 @@ public class View extends JFrame
 
 		myController = controller;
 
+		// Info Panel
+		myInfoPanel = new JPanel();
+		myInfoPanel.setLayout(new BoxLayout(myInfoPanel, BoxLayout.PAGE_AXIS));
+
 		// Chad testing
 		myNumCustomers = new JLabel("Num Customers");
-		myServiceQueues = new JLabel("");
 		myMaxServiceTime = new JLabel("Max service time");
 		myMaxCashiers = new JLabel("Max Num Cashiers");
+
+		// Creating the text fields
+		myTextFields = new JTextField[MAX_NUM_OF_TELLERS];
+		for (int i = 0; i < MAX_NUM_OF_TELLERS; i++)
+		{
+			myTextFields[i] = new JTextField("Info for teller " + i);
+			myInfoPanel.add(myTextFields[i], BorderLayout.EAST);
+		}
 
 		// Start/Pause Button
 		myStartPauseButton = new JButton("Start");
@@ -69,7 +80,7 @@ public class View extends JFrame
 		// Frame info
 		this.setSize(600, 600);
 		this.setLocation(100, 100);
-		this.setTitle("Sample Queue MVC");
+		this.setTitle("Queue MVC Chad");
 		this.setResizable(false);
 
 		myContentPane = getContentPane();
@@ -80,10 +91,6 @@ public class View extends JFrame
 		mySimPanel.setBorder(BorderFactory.createLoweredBevelBorder());
 		mySimPanel.setLayout(null);
 
-		//Info Panel
-		myInfoPanel = new JPanel();
-		myInfoPanel.setLayout(new BoxLayout(myInfoPanel, BoxLayout.PAGE_AXIS));
-		
 		// Customer Served Counter
 		myTotalServed = new JLabel[MAX_NUM_OF_TELLERS];
 
