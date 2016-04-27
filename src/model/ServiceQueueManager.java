@@ -69,7 +69,7 @@ public class ServiceQueueManager
 	 */
 	public int getNumCustomers(int queueNum)
 	{
-		int i =myServiceQueues[queueNum].getNumberCustomersInLine();
+		int i = myServiceQueues[queueNum].getNumberCustomersInLine();
 		return i;
 	}
 

@@ -32,13 +32,15 @@ public class View extends JFrame
 	private JLabel[] myTeller;
 	private JPanel mySimPanel;
 
-	// Chad Testing
+	// Chad
 	private JLabel myNumCustomers;
 	private JLabel myServiceQueues;
 	private JLabel myMaxServiceTime;
 	private JLabel myMaxCashiers;
 	private JPanel myInfoPanel;
 	private JTextField[] myTextFields;
+	private JLabel[] myTextFieldLabels;
+	private JLabel[] myTotalOverflow;
 
 	// Constructor
 
@@ -64,11 +66,14 @@ public class View extends JFrame
 		myMaxServiceTime = new JLabel("Max service time");
 		myMaxCashiers = new JLabel("Max Num Cashiers");
 
-		// Creating the text fields
+		// Creating the text fields and their labels
 		myTextFields = new JTextField[MAX_NUM_OF_TELLERS];
+		myTextFieldLabels = new JLabel[MAX_NUM_OF_TELLERS];
 		for (int i = 0; i < MAX_NUM_OF_TELLERS; i++)
 		{
-			myTextFields[i] = new JTextField("Info for teller " + i);
+			myTextFields[i] = new JTextField("");
+			myTextFieldLabels[i] = new JLabel("Info for teller " + i);
+			myInfoPanel.add(myTextFieldLabels[i], BorderLayout.EAST);
 			myInfoPanel.add(myTextFields[i], BorderLayout.EAST);
 		}
 
@@ -93,14 +98,22 @@ public class View extends JFrame
 
 		// Customer Served Counter
 		myTotalServed = new JLabel[MAX_NUM_OF_TELLERS];
-
+		myTotalOverflow = new JLabel[MAX_NUM_OF_TELLERS];
 		for (int i = 0; i < myTotalServed.length; i++)
 		{
+			//Total Served
 			myTotalServed[i] = new JLabel("0");
 			myTotalServed[i].setSize(COUNTER_BOX_WIDTH, COUNTER_BOX_HEIGHT);
 			myTotalServed[i].setLocation(65 + (CUSTOMER_WIDTH * i), ROW_2);
 			myTotalServed[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
 			mySimPanel.add(myTotalServed[i]);
+			
+			//Overflow
+			myTotalOverflow[i] = new JLabel("0");
+			myTotalOverflow[i].setSize(COUNTER_BOX_WIDTH, COUNTER_BOX_HEIGHT);
+			myTotalOverflow[i].setLocation(65 + (CUSTOMER_WIDTH * i), 0);
+			myTotalOverflow[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+			mySimPanel.add(myTotalOverflow[i]);
 		}
 
 		// Teller locations
@@ -138,7 +151,6 @@ public class View extends JFrame
 		myContentPane.add(mySimPanel, BorderLayout.CENTER);
 		myInfoPanel.add(myStartPauseButton, BorderLayout.EAST);
 		myInfoPanel.add(myNumCustomers, BorderLayout.EAST);
-		myInfoPanel.add(myServiceQueues, BorderLayout.EAST);
 		myInfoPanel.add(myMaxServiceTime, BorderLayout.EAST);
 		myInfoPanel.add(myMaxCashiers, BorderLayout.EAST);
 		myContentPane.add(myInfoPanel, BorderLayout.EAST);

@@ -14,6 +14,7 @@ public class Controller implements Runnable
 	private View myView;
 	private boolean mySuspended;
 	private Thread myThread;
+	private UniformCustomerGenerator myUniformCustomerGenerator;
 	
 	/**
 	 * Basic Constructor
@@ -24,7 +25,7 @@ public class Controller implements Runnable
 		myView = new View(this);
         myThread = new Thread(this);
 		mySuspended = false;
-		
+//		myUniformCustomerGenerator = new UniformCustomerGenerator(myView.get );
 		this.start();
 		this.startPause();
 	}
