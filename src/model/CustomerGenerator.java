@@ -1,6 +1,9 @@
 package model;
 
 /**
+ * Class that creates x amount of customers and sends them to the service queue
+ * manager
+ * 
  * Created by chadbaily on 4/12/16.
  */
 public abstract class CustomerGenerator implements Runnable
@@ -11,6 +14,13 @@ public abstract class CustomerGenerator implements Runnable
 	private Customer myCustomer;
 	private Thread myThread;
 
+	/**
+	 * Constructor for Customer generator, sets the correct variables
+	 * 
+	 * @param maxTimeBetweenCustomers
+	 * @param serviceQueueManager
+	 * @param maxNumberOfCustomers
+	 */
 	public CustomerGenerator(int maxTimeBetweenCustomers, ServiceQueueManager serviceQueueManager,
 			int maxNumberOfCustomers)
 	{
@@ -61,7 +71,8 @@ public abstract class CustomerGenerator implements Runnable
 	}
 
 	/**
-	 * Starts the thread for the customer generator, catches an exception if the thread is already started
+	 * Starts the thread for the customer generator, catches an exception if the
+	 * thread is already started
 	 */
 
 	public void start()

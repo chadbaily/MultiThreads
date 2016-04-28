@@ -18,9 +18,13 @@ public class ServiceQueueManager
 	private long myPresentTime;
 	private long myStartTime;
 
+	/**
+	 * Creates a Service Queue manager and fills it with 5 queues, also sets the
+	 * times
+	 */
 	public ServiceQueueManager()
 	{
-		myNumberOfServiceQueues =3;
+		myNumberOfServiceQueues = 3;
 		myServiceQueues = new ServiceQueue[3];
 		for (int i = 0; i < myNumberOfServiceQueues; i++)
 		{
@@ -37,7 +41,8 @@ public class ServiceQueueManager
 	}
 
 	/**
-	 * Loops through the service queue, getting each total served, then adding it to myTotalServed
+	 * Loops through the service queue, getting each total served, then adding
+	 * it to myTotalServed
 	 *
 	 * @return The total customers served in all service queues
 	 */
@@ -51,7 +56,8 @@ public class ServiceQueueManager
 	}
 
 	/**
-	 * Loops through the service queue, getting each total wait time, then adds it to myTotalWaitTime
+	 * Loops through the service queue, getting each total wait time, then adds
+	 * it to myTotalWaitTime
 	 *
 	 * @return The total wait time for all the service queues
 	 */
@@ -63,7 +69,7 @@ public class ServiceQueueManager
 		}
 		return myTotalServed;
 	}
-	
+
 	/**
 	 * Method that gets the total amount of customers in a service queue
 	 */
@@ -74,7 +80,8 @@ public class ServiceQueueManager
 	}
 
 	/**
-	 * Loops through the service queue, getting each total service time, then adds it to myTotalServiceTime
+	 * Loops through the service queue, getting each total service time, then
+	 * adds it to myTotalServiceTime
 	 *
 	 * @return The total service time for all the service queues
 	 */
@@ -88,7 +95,8 @@ public class ServiceQueueManager
 	}
 
 	/**
-	 * Loops through the service queue, getting each total idle time, then adds it to myTotalIdleTime
+	 * Loops through the service queue, getting each total idle time, then adds
+	 * it to myTotalIdleTime
 	 *
 	 * @return The total idle time for all the service queues
 	 */
@@ -102,8 +110,8 @@ public class ServiceQueueManager
 	}
 
 	/**
-	 * Loops through all the service queues, getting each length, and compares them. Sets the shortest to a temp
-	 * variable
+	 * Loops through all the service queues, getting each length, and compares
+	 * them. Sets the shortest to a temp variable
 	 *
 	 * @return The shortest service queue in the service queue manager
 	 */
@@ -113,11 +121,12 @@ public class ServiceQueueManager
 		ServiceQueue queue = myServiceQueues[0];
 		for (int i = 0; i < myServiceQueues.length; i++)
 		{
-			if (queue.getNumberCustomersInLine() > myServiceQueues[i].getNumberCustomersInLine() || myServiceQueues[i] == queue)
+			if (queue.getNumberCustomersInLine() > myServiceQueues[i].getNumberCustomersInLine()
+					|| myServiceQueues[i] == queue)
 			{
 				queue = myServiceQueues[i];
 				queueIndex = i;
-				//Delete me later
+				// Delete me later
 				System.out.println("Shortest Queue: " + i + " with " + myServiceQueues[i].getNumberCustomersInLine()
 						+ " customers");
 			}
@@ -133,7 +142,7 @@ public class ServiceQueueManager
 	public void addToShortestQueue(Customer customer, int index)
 	{
 
-		myServiceQueues[index].enqueue(customer);
+		myServiceQueues[index].insertCustomer(customer);;
 	}
 
 	public float getAverageWaitTime()

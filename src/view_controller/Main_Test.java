@@ -19,7 +19,7 @@ public class Main_Test
 		UniformCashier[] myUniformCashiers;
 
 		myServiceQueueManager = new ServiceQueueManager();
-		myCustomerGenerator = new UniformCustomerGenerator(500, myServiceQueueManager, 50);
+		myCustomerGenerator = new UniformCustomerGenerator(500, myServiceQueueManager, 3);
 		myCustomerGenerator.run();
 		myUniformCashiers = new UniformCashier[3];
 
