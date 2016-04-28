@@ -82,8 +82,7 @@ public class View extends JFrame
 		myTextFields = new JTextField[MAX_NUM_OF_TELLERS];
 		for (int i = 0; i < MAX_NUM_OF_TELLERS; i++)
 		{
-			myTextFields[i] = new JTextField("  ");
-			myTextFields[i].setSize(COUNTER_BOX_WIDTH, COUNTER_BOX_HEIGHT);
+			myTextFields[i] = new JTextField("			");
 			myInfoPanel.add(myTextFields[i]);
 		}
 
@@ -180,6 +179,33 @@ public class View extends JFrame
 	/*
 	 * Methods
 	 */
+
+	/**
+	 * Method that get the text of the max customer JTextField box
+	 */
+	public int getMaxCustomer()
+	{
+		int temp = Integer.parseInt(myNumCustomers.getText());
+		return temp;
+	}
+
+	/**
+	 * Method that get the text of the max service time JTextField box
+	 */
+	public int getMaxServiceTime()
+	{
+		int temp = Integer.parseInt(myMaxServiceTime.getText());
+		return temp;
+	}
+
+	/**
+	 * Method that get the text of the max service time JTextField box
+	 */
+	public int getMaxCashiers()
+	{
+		int temp = Integer.parseInt(myMaxCashiers.getText());
+		return temp;
+	}
 
 	public void changeStartPause()
 	{
