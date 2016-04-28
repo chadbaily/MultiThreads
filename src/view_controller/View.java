@@ -33,14 +33,18 @@ public class View extends JFrame
 	private JPanel mySimPanel;
 
 	// Chad
-	private JLabel myNumCustomers;
-	private JLabel myServiceQueues;
-	private JLabel myMaxServiceTime;
-	private JLabel myMaxCashiers;
+	private JLabel myLabelNumCustomers;
+	private JLabel myLabelMaxServiceTime;
+	private JLabel myLabelMaxCashiers;
 	private JPanel myInfoPanel;
+	private JPanel myInfoSetter;
 	private JTextField[] myTextFields;
 	private JLabel[] myTextFieldLabels;
 	private JLabel[] myTotalOverflow;
+	// Text Boxes
+	private JTextField myNumCustomers;
+	private JTextField myMaxServiceTime;
+	private JTextField myMaxCashiers;
 
 	// Constructor
 
@@ -59,26 +63,32 @@ public class View extends JFrame
 
 		// Info Panel
 		myInfoPanel = new JPanel();
-		myInfoPanel.setLayout(new BoxLayout(myInfoPanel, BoxLayout.PAGE_AXIS));
+		myInfoPanel.setLayout(new FlowLayout());
+
+		GridLayout bottom = new GridLayout(0, 2);
+		myInfoSetter = new JPanel();
+		myInfoSetter.setLayout(bottom);
+
+		myNumCustomers = new JTextField("");
+		myMaxServiceTime = new JTextField("");
+		myMaxCashiers = new JTextField("");
 
 		// Chad testing
-		myNumCustomers = new JLabel("Num Customers");
-		myMaxServiceTime = new JLabel("Max service time");
-		myMaxCashiers = new JLabel("Max Num Cashiers");
+		myLabelNumCustomers = new JLabel("# Customers");
+		myLabelMaxServiceTime = new JLabel("Serv Time");
+		myLabelMaxCashiers = new JLabel("Cashiers");
 
 		// Creating the text fields and their labels
 		myTextFields = new JTextField[MAX_NUM_OF_TELLERS];
-		myTextFieldLabels = new JLabel[MAX_NUM_OF_TELLERS];
 		for (int i = 0; i < MAX_NUM_OF_TELLERS; i++)
 		{
-			myTextFields[i] = new JTextField("");
-			myTextFieldLabels[i] = new JLabel("Info for teller " + i);
-			myInfoPanel.add(myTextFieldLabels[i], BorderLayout.EAST);
-			myInfoPanel.add(myTextFields[i], BorderLayout.EAST);
+			myTextFields[i] = new JTextField("  ");
+			myTextFields[i].setSize(COUNTER_BOX_WIDTH, COUNTER_BOX_HEIGHT);
+			myInfoPanel.add(myTextFields[i]);
 		}
 
 		// Start/Pause Button
-		myStartPauseButton = new JButton("Start");
+		myStartPauseButton = new JButton("Pause");
 
 		this.associateListeners(myController);
 
@@ -96,19 +106,19 @@ public class View extends JFrame
 		mySimPanel.setBorder(BorderFactory.createLoweredBevelBorder());
 		mySimPanel.setLayout(null);
 
-		// Customer Served Counter
+		// Customer Served Counter and total overflow
 		myTotalServed = new JLabel[MAX_NUM_OF_TELLERS];
 		myTotalOverflow = new JLabel[MAX_NUM_OF_TELLERS];
 		for (int i = 0; i < myTotalServed.length; i++)
 		{
-			//Total Served
+			// Total Served
 			myTotalServed[i] = new JLabel("0");
 			myTotalServed[i].setSize(COUNTER_BOX_WIDTH, COUNTER_BOX_HEIGHT);
 			myTotalServed[i].setLocation(65 + (CUSTOMER_WIDTH * i), ROW_2);
 			myTotalServed[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
 			mySimPanel.add(myTotalServed[i]);
-			
-			//Overflow
+
+			// Overflow
 			myTotalOverflow[i] = new JLabel("0");
 			myTotalOverflow[i].setSize(COUNTER_BOX_WIDTH, COUNTER_BOX_HEIGHT);
 			myTotalOverflow[i].setLocation(65 + (CUSTOMER_WIDTH * i), 0);
@@ -149,18 +159,27 @@ public class View extends JFrame
 		bg.setLocation(0, 0);
 		mySimPanel.add(bg);
 		myContentPane.add(mySimPanel, BorderLayout.CENTER);
-		myInfoPanel.add(myStartPauseButton, BorderLayout.EAST);
-		myInfoPanel.add(myNumCustomers, BorderLayout.EAST);
-		myInfoPanel.add(myMaxServiceTime, BorderLayout.EAST);
-		myInfoPanel.add(myMaxCashiers, BorderLayout.EAST);
-		myContentPane.add(myInfoPanel, BorderLayout.EAST);
+
+		myInfoSetter.add(myLabelNumCustomers);
+		myInfoSetter.add(myNumCustomers);
+
+		myInfoSetter.add(myLabelMaxServiceTime);
+		myInfoSetter.add(myMaxServiceTime);
+
+		myInfoSetter.add(myLabelMaxCashiers);
+		myInfoSetter.add(myMaxCashiers);
+
+		myInfoSetter.add(myStartPauseButton, BorderLayout.EAST);
+
+		myContentPane.add(myInfoSetter, BorderLayout.EAST);
+		myContentPane.add(myInfoPanel, BorderLayout.SOUTH);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
-	//////////////////////////////////////////
-	// Methods //
-	//////////////////////////////////////////
+	/*
+	 * Methods
+	 */
 
 	public void changeStartPause()
 	{
