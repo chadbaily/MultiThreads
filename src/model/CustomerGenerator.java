@@ -30,15 +30,27 @@ public abstract class CustomerGenerator implements Runnable
 
 	}
 
+	/**
+	 * Abstract method for generating time between customers
+	 * 
+	 * @return
+	 */
 	public abstract int generateTimeBetweenCustomers();
 
+	/**
+	 * Method that creates and returns a customer
+	 * 
+	 * @return
+	 */
 	public Customer generateCustomer()
 	{
-
 		myCustomer = new Customer();
 		return myCustomer;
 	}
 
+	/**
+	 * Method that loops through and creates the max amount of customers
+	 */
 	private void makeAllCustomers()
 	{
 		int o = 0;

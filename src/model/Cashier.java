@@ -1,6 +1,9 @@
 package model;
 
 /**
+ * Class that replicated a cashier, contains a thread that acts independently
+ * from the rest of a program
+ * 
  * Created by chadbaily on 4/12/16.
  */
 public abstract class Cashier implements Runnable
@@ -20,9 +23,10 @@ public abstract class Cashier implements Runnable
 	}
 
 	/**
-	 * Method that services all customers in the serviceQueue that was passed in. Gets a service time and wait that long
-	 * to service the customer. Then the customer is removed from the queue and the service queue is updated to show
-	 * this
+	 * Method that services all customers in the serviceQueue that was passed
+	 * in. Gets a service time and wait that long to service the customer. Then
+	 * the customer is removed from the queue and the service queue is updated
+	 * to show this
 	 *
 	 * @return
 	 * @throws InterruptedException
@@ -37,7 +41,7 @@ public abstract class Cashier implements Runnable
 			{
 				myServiceTime = generateServiceTime();
 				Thread.sleep(myServiceTime);
-				//Delete me later
+				// Delete me later
 				System.out.println("Service Time: " + myServiceTime);
 			}
 
@@ -48,7 +52,7 @@ public abstract class Cashier implements Runnable
 			((Customer) myServiceQueue.peek()).setServiceTime(myServiceTime);
 			myServiceQueue.addToSericeTime(myServiceTime);
 			myServiceQueue.serveCustomer();
-			//Delete me later
+			// Delete me later
 			System.out.println("Customers Served So Far: " + myServiceQueue.getNumberCustomersServedSoFar());
 			System.out.println("Customers in Line: " + myServiceQueue.getNumberCustomersInLine() + "\n");
 
@@ -58,7 +62,8 @@ public abstract class Cashier implements Runnable
 	}
 
 	/**
-	 * Method that uses a random generator to create a random number for the cashier to wait before serving a customer
+	 * Method that uses a random generator to create a random number for the
+	 * cashier to wait before serving a customer
 	 *
 	 * @return the time the cashier needs to wait before serving a customer
 	 */
@@ -101,7 +106,8 @@ public abstract class Cashier implements Runnable
 	}
 
 	/**
-	 * Starts the thread for the cashier, catches an exception if the thread is already started
+	 * Starts the thread for the cashier, catches an exception if the thread is
+	 * already started
 	 */
 	public void start()
 	{

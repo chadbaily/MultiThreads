@@ -10,6 +10,9 @@ public class Customer
 	private long myWaitTime;
 	private long myStart;
 
+	/**
+	 * Constructor that creates a customer and sets appropriate times
+	 */
 	public Customer()
 	{
 		myServiceTime = 0;
@@ -18,6 +21,10 @@ public class Customer
 		System.gc();
 		myStart = System.currentTimeMillis();
 	}
+
+	/*
+	 * Getters and setters
+	 */
 
 	public long getWaitTime()
 	{

@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Method that Creates a service queue and keeps track of the times for a
+ * Class that Creates a service queue and keeps track of the times for a
  * customer
  * 
  * Created by chadbaily on 4/12/16.

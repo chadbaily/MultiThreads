@@ -3,6 +3,9 @@ package model;
 import java.util.Random;
 
 /**
+ * Class that extends a Cashier and implements the abstract method
+ * generateServiceTime
+ * 
  * Created by chadbaily on 4/12/16.
  */
 public class UniformCashier extends Cashier

@@ -3,6 +3,10 @@ package model;
 import java.util.Random;
 
 /**
+ * Class that creates uniform customers and adds them to the service queue.
+ * Extends customer generator
+ * 
+ * 
  * Created by chadbaily on 4/12/16.
  */
 public class UniformCustomerGenerator extends CustomerGenerator
@@ -24,6 +28,7 @@ public class UniformCustomerGenerator extends CustomerGenerator
 
 	/**
 	 * Method to generate the time between customers that are created?
+	 * 
 	 * @return
 	 */
 	public int generateTimeBetweenCustomers()

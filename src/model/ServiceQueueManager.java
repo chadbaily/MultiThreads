@@ -1,6 +1,9 @@
 package model;
 
 /**
+ * Class that manages service queues and keeps track of the times associated
+ * with them
+ * 
  * Created by chadbaily on 4/12/16.
  */
 public class ServiceQueueManager
@@ -142,9 +145,12 @@ public class ServiceQueueManager
 	public void addToShortestQueue(Customer customer, int index)
 	{
 
-		myServiceQueues[index].insertCustomer(customer);;
+		myServiceQueues[index].insertCustomer(customer);
 	}
 
+	/*
+	 * Getters and Setters
+	 */
 	public float getAverageWaitTime()
 	{
 		return myAverageWaitTime;
